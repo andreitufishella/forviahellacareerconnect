@@ -12,7 +12,7 @@
 :root{
   --blue:#0022D2; --blue-d:#0019A0; --ink:#000B45; --ink2:#00072E; --sky:#00A9EB; --amber:#F58C35; --green:#00A884; --red:#E5484D; --yellow:#FED34C;
   --bg:#FFFFFF; --soft:#F3F5FB; --soft2:#E9EDF8; --line:#E1E6F2; --text:#0A0F2E; --muted:#596187; --faint:#8A92B4;
-  --accent:#0022D2; --card:#FFFFFF; --sel:#F2F5FF; --tagbg:#EAEEFF; --hdrbg:rgba(255,255,255,.92); --hintbg:#FFF8E1; --hintfg:#6B5310; --hintic:#C79300; --okbg:#E6F7F1; --okfg:#007A60; --nobg:#FDEEEE; --nofg:#B4282D; --panel:#000B45;
+  --accent:#0022D2; --card:#FFFFFF; --sel:#F2F5FF; --tagbg:#EAEEFF; --hdrbg:rgba(255,255,255,.92); --hintbg:#FFF8E1; --hintfg:#6B5310; --hintic:#C79300; --okbg:#E6F7F1; --okfg:#007A60; --nobg:#FDEEEE; --nofg:#B4282D; --panel:#000B45; --f1:#00A9EB; --f2:#0022D2; --f3:#E8781F;
   --r:18px; --ease:cubic-bezier(.2,.8,.2,1); --spring:cubic-bezier(.3,1.5,.5,1);
   --display:"Archivo","Helvetica Neue",Arial,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
 }
@@ -517,6 +517,95 @@ footer.ftr .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space
 footer.ftr img{height:22px;width:auto;flex:none}
 footer.ftr .ev b{color:var(--text)}
 
+
+/* ---------- cards ---------- */
+.f1{--fc:var(--f1)}.f2{--fc:var(--f2)}.f3{--fc:var(--f3)}
+.famtag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--fc);padding:6px 11px 6px 9px;border-radius:999px;background:color-mix(in srgb,var(--fc) 13%,transparent);white-space:nowrap}
+.famtag .ico{width:14px;height:14px}
+.deck{display:grid;gap:12px;margin-top:26px}
+@media(min-width:760px){.deck{grid-template-columns:repeat(3,1fr);gap:16px}}
+.pcard{perspective:1200px}
+.pcard .in{position:relative;display:grid;transform-style:preserve-3d;transition:transform .9s var(--spring)}
+.pcard.flip .in{transform:rotateY(180deg)}
+.pcard .face{grid-area:1/1;border-radius:22px;-webkit-backface-visibility:hidden;backface-visibility:hidden;padding:20px;display:flex;flex-direction:column;min-height:172px;position:relative;overflow:hidden}
+.pcard .back{background:var(--ink);color:#fff;align-items:center;justify-content:center;gap:10px;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.045) 0 2px,transparent 2px 12px)}
+.pcard .back .bn{position:absolute;left:18px;top:14px;font-family:var(--mono);font-size:12px;color:#9FB0E8}
+.pcard .back .bi{width:44px;height:44px;color:#7FD3FF}
+.pcard .back .bl{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:#9FB0E8}
+.pcard .front{transform:rotateY(180deg);background:var(--card);border:1.5px solid var(--line);box-shadow:inset 0 4px 0 var(--fc)}
+.pcard .front .famtag{align-self:flex-start}
+.pcard .front .ci{position:absolute;right:16px;top:14px;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--fc) 13%,transparent);color:var(--fc)}
+.pcard .front h3{font-size:21px;font-weight:900;font-stretch:112%;line-height:1.1;margin-top:16px}
+.pcard .front p{font-size:14px;color:var(--muted);margin-top:6px;line-height:1.45}
+.pcard .front .cm{margin-top:auto;padding-top:12px;display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+.pcard .front .cm .ico{width:14px;height:14px}
+.chead{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.tname{display:flex;align-items:center;gap:8px;font-weight:800;font-size:14.5px;color:var(--muted);margin-top:18px}
+.tname .ico{width:18px;height:18px;color:var(--fc)}
+.opt{cursor:pointer}
+.opt h4{font-weight:700}
+.inp{width:100%;height:52px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);color:var(--text);padding:0 16px;font:inherit;font-size:16px;outline:0;transition:border-color .2s,box-shadow .2s}
+.inp:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(0,34,210,.12)}
+.inp::placeholder{color:var(--faint)}
+.inp:disabled{opacity:.6}
+.ownin{margin-top:10px;height:46px;font-size:16px}
+.ideabox{margin-top:22px}
+.ideain{display:flex;gap:8px}
+.addb{width:52px;height:52px;flex:none;border-radius:14px;background:var(--blue);color:#fff;display:grid;place-items:center;transition:transform .2s}
+.addb:active{transform:scale(.92)}
+.ideas{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.idea{display:inline-flex;align-items:center;gap:4px;max-width:100%;padding:7px 6px 7px 14px;border-radius:999px;background:var(--sel);border:1.5px solid color-mix(in srgb,var(--f1) 45%,transparent);font-size:14.5px;font-weight:600;animation:pop .35s var(--spring);overflow-wrap:anywhere}
+.idea button{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:var(--muted);flex:none}
+.idea .ico{width:13px;height:13px}
+@keyframes pop{from{transform:scale(.6);opacity:0}}
+.ideafoot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;font-size:13px;color:var(--faint)}
+.timer{display:inline-flex;align-items:center;gap:8px}
+.timer svg{width:22px;height:22px;transform:rotate(-90deg)}
+.timer circle{fill:none;stroke:var(--soft2);stroke-width:4}
+.timer .tr{stroke:var(--f1);stroke-dasharray:97.4;stroke-dashoffset:0;animation:tmr 60s linear forwards}
+@keyframes tmr{to{stroke-dashoffset:97.4}}
+.estbox{margin-top:24px;padding:22px 20px 16px;border-radius:22px;background:var(--soft);text-align:center}
+.estlbl{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.estnum{font-size:clamp(38px,11vw,62px);font-weight:900;font-stretch:118%;line-height:1.15;margin:6px 0 10px;color:var(--fc);font-variant-numeric:tabular-nums;min-height:1.15em;display:grid;place-items:center}
+.estnum span{font-size:18px;font-weight:700;color:var(--faint)}
+.range{width:100%;accent-color:var(--blue);height:34px;cursor:pointer}
+.estscale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fchip{display:inline-flex;align-items:center;gap:7px;padding:10px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);font-size:14px;font-weight:600;color:var(--text);text-align:left;transition:border-color .2s,background .2s}
+.fchip .ico{width:14px;height:14px;display:none;stroke-width:2.6}
+.fchip[aria-pressed="true"]{border-color:var(--blue);background:var(--sel)}
+.fchip[aria-pressed="true"] .ico{display:block;color:var(--accent)}
+.seqrow{display:flex;gap:8px;margin-top:24px}
+.tok{flex:1;min-width:0;max-width:76px;aspect-ratio:.88;border-radius:16px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:clamp(22px,6.5vw,32px);font-weight:900;font-stretch:115%;animation:pop .45s var(--spring) both}
+.tok:nth-child(2){animation-delay:.07s}.tok:nth-child(3){animation-delay:.14s}.tok:nth-child(4){animation-delay:.21s}.tok:nth-child(5){animation-delay:.28s}.tok:nth-child(6){animation-delay:.35s}
+.tok.q{background:transparent;border:2px dashed color-mix(in srgb,var(--fc) 60%,var(--line));color:var(--fc)}
+.shp{width:58%;height:58%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
+.oi .shp{width:26px;height:26px}
+.oi.big b{font-size:20px;font-weight:900;font-stretch:115%}
+.seqrow.sm{margin-top:12px}.seqrow.sm .tok{max-width:52px;border-radius:12px;font-size:20px;animation:none}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+@media(min-width:720px){.tiles{grid-template-columns:repeat(3,1fr)}}
+.otile{display:flex;align-items:center;gap:12px;text-align:left;padding:14px;border-radius:16px;border:1.5px solid var(--line);background:var(--card);font-size:15px;font-weight:700;line-height:1.25;min-height:66px;transition:border-color .25s,background .25s,transform .2s}
+.otile:active{transform:scale(.97)}
+.otile .ob{width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;background:var(--soft);font-family:var(--mono);font-size:12px;color:var(--muted);transition:.25s}
+.otile[aria-pressed="true"]{border-color:var(--f3);background:color-mix(in srgb,var(--f3) 10%,var(--card))}
+.otile[aria-pressed="true"] .ob{background:var(--f3);color:#fff}
+.objhint{margin-top:10px;font-size:13px;color:var(--faint)}
+.sumrow{align-items:center}
+.sumrow>span .ico{width:18px;height:18px;color:var(--fc)}
+.sumrow small{display:block;font-size:11.5px;color:var(--faint);font-weight:600}
+.sumrow b{font-weight:700;overflow-wrap:anywhere}
+.hcard{box-shadow:inset 4px 0 0 var(--fc)}
+.hhead{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.ha.big{font-size:30px;font-weight:900;font-stretch:115%}
+.hideas,.hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.hideas span{padding:7px 12px;border-radius:999px;background:var(--sel);font-weight:600;font-size:14.5px;overflow-wrap:anywhere}
+.hchips span{padding:6px 11px;border-radius:999px;border:1.5px solid var(--line);font-size:13px;font-weight:600;color:var(--muted)}
+.hnote{margin-top:6px;color:var(--muted);font-style:italic}
+.hask{display:grid;gap:6px;margin-top:14px}
+.hobs{display:flex;gap:8px;margin-top:12px;font-size:13px;color:var(--muted);line-height:1.4}
+.hobs .ico{width:16px;height:16px;color:var(--fc);margin-top:1px}
+
 /* ---------- ECO (low carbon) ---------- */
 body.eco *,body.eco *::before,body.eco *::after{animation:none!important;transition:none!important}
 body.eco .rise>*,body.eco .rv,body.eco .slide .an{opacity:1!important;transform:none!important}
@@ -538,7 +627,7 @@ body.eco .hero::after,body.eco .story::after{content:"";position:absolute;inset:
 body.eco .story::after{z-index:0;opacity:.45;-webkit-mask:radial-gradient(420px 300px at 92% 6%,#000,transparent 75%);mask:radial-gradient(420px 300px at 92% 6%,#000,transparent 75%)}
 body.eco .band::after{opacity:.06}
 /* dark mode */
-body.dark{--bg:#050A24;--soft:#0E1538;--soft2:#1C2552;--line:#222C5C;--text:#EEF2FF;--muted:#A6B1D8;--faint:#6F7AA8;--accent:#8AA4FF;--card:#0A1031;--sel:#131F55;--tagbg:#17245C;--hdrbg:rgba(5,10,36,.88);--hintbg:#2A2209;--hintfg:#F3DA8A;--hintic:#F0C43C;--okbg:#0B2E27;--okfg:#5BE3BD;--nobg:#3A1418;--nofg:#FF9A9E;--panel:#131D55}
+body.dark{--bg:#050A24;--soft:#0E1538;--soft2:#1C2552;--line:#222C5C;--text:#EEF2FF;--muted:#A6B1D8;--faint:#6F7AA8;--accent:#8AA4FF;--card:#0A1031;--sel:#131F55;--tagbg:#17245C;--hdrbg:rgba(5,10,36,.88);--hintbg:#2A2209;--hintfg:#F3DA8A;--hintic:#F0C43C;--okbg:#0B2E27;--okfg:#5BE3BD;--nobg:#3A1418;--nofg:#FF9A9E;--panel:#131D55;--f2:#8AA4FF;--f3:#FF9A4D}
 body.dark .hbtn.reset{background:var(--blue);border-color:var(--blue)}
 body.dark .final,body.dark .brief,body.dark .lamp,body.dark .code{border:1px solid var(--line)}
 body.dark .hero{border-bottom:1px solid var(--line)}
@@ -588,6 +677,16 @@ body.dark .st:hover .ic,body.dark .field:not(.soon):hover .fi,body.dark .opt[ari
   <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
   <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
   <symbol id="i-beam" viewBox="0 0 24 24"><path d="M3 7.5h3.5a4.5 4.5 0 0 1 0 9H3z"/><path d="M13 8l8-2M13 11l8-.5M13 13l8 .5M13 16l8 2"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></symbol>
+  <symbol id="i-lens" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.3-4.3"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 16a8 8 0 1 1 16 0"/><path d="M12 16l4-5"/><circle cx="12" cy="16" r="1.2"/></symbol>
+  <symbol id="i-seq" viewBox="0 0 24 24"><rect x="2.5" y="8.5" width="5.5" height="7" rx="1.2"/><rect x="10" y="8.5" width="5.5" height="7" rx="1.2"/><path d="M18 12h3.5M20 10.3l1.6 1.7-1.6 1.7"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7M12 11v10"/></symbol>
+  <symbol id="i-fork" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="12" cy="19.5" r="2"/><path d="M6 7v1.5A3.5 3.5 0 0 0 9.5 12h5A3.5 3.5 0 0 0 18 8.5V7M12 12v5.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-cards" viewBox="0 0 24 24"><rect x="3" y="6.5" width="12" height="15" rx="2"/><path d="M8 3.5h10.5a2 2 0 0 1 2 2V18"/></symbol>
+  <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></symbol>
   <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15"/><path d="M5 19c3-4 6-6 9-7"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
   <symbol id="i-grad" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></symbol>
@@ -649,10 +748,10 @@ const T = {
   rsT:"Vrei să o iei de la capăt?", rsP:"Răspunsurile de până acum se șterg și revii la prima pagină. Poți alege apoi alt challenge.", rsY:"Da, de la capăt", rsN:"Nu, continui",
   heroChip:"Timișoara Career Connect · 11.11.2026", turn:"Rotește comutatorul ca să pornești",
   h1a:"Arată-ne", h1b:"cum", h1c:"gândești.",
-  heroSub:"Un challenge de 3 minute, pornit din proiectele noastre reale. Apoi o discuție scurtă, la stand, cu oamenii care lucrează la ele.",
+  heroSub:"Trei cărți, trei minute, niciun răspuns greșit. Apoi o discuție scurtă, la stand, cu oamenii FORVIA HELLA.",
   start:"Începe", total:"Durează cam 5 minute",
   howE:"Cum funcționează", howT:"Patru pași. Fără răspunsuri greșite.",
-  how:[["i-play","Ne cunoaștem","Afli în 60 de secunde cine este FORVIA HELLA în România."],["i-layers","Alegi un domeniu","Electronics sau Software, în funcție de ce te atrage."],["i-clock","Rezolvi challenge-ul","Trei decizii, cam 3 minute. Ne interesează cum gândești."],["i-gift","Vorbim la stand","Ne explici alegerile, apoi primești un cadou din partea noastră."]],
+  how:[["i-play","Ne cunoaștem","Afli în 60 de secunde cine este FORVIA HELLA în România."],["i-cards","Primești 3 cărți","Imaginație, logică și decizie, trase la întâmplare."],["i-clock","Le joci","Cam un minut pe carte. Ne interesează cum gândești, nu ce știi."],["i-gift","Vorbim la stand","Ne explici alegerile, apoi primești un cadou din partea noastră."]],
   kf:[["4.500+","angajați FORVIA HELLA în România"],["1 din 2","vehicule din lume au produse FORVIA"],["2005","anul în care am început în Timișoara"]],
   finT:"Gata să începi?", finP:"Ai nevoie doar de telefon și de 5 minute.",
   // story
@@ -695,16 +794,16 @@ const T = {
   // flow
   begin:"Începe challenge-ul", cont:"Continuă", gen:"Generează codul QR", skip:"Prefer să explic direct, la stand",
   stepOf:(a,b)=>`Pasul ${a} din ${b}`,
-  rules:["Nu există răspunsuri greșite","Fără cronometru","Datele rămân în telefon"],
-  rE:"Ultimul pas", rQ:"Care a fost cea mai grea decizie și de ce?", rC:"O propoziție e de ajuns. O s-o discutăm la stand, în câteva minute.", rPh:"De exemplu: Am ales… pentru că…", yours:"Alegerile tale",
+  rules:["Nu există răspunsuri greșite","Fără presiune de timp","Datele rămân în telefon"],
+  rE:"Ultimul pas", rQ:"Ce carte ți-a plăcut cel mai mult și de ce?", rC:"O propoziție e de ajuns. O s-o discutăm la stand, în câteva minute.", rPh:"De exemplu: Estimarea, pentru că…", yours:"Alegerile tale",
   // done
-  dE:"Challenge încheiat", dT:"Gata! Acum hai să vorbim.", dL:"Codul de mai jos conține alegerile tale. Nu pleacă nicăieri din telefon: un coleg de la stand îl scanează direct de pe ecran.",
+  dE:"Toate cele 3 cărți, jucate", dT:"Gata! Acum hai să vorbim.", dL:"Codul de mai jos conține alegerile tale. Nu pleacă nicăieri din telefon: un coleg de la stand îl scanează direct de pe ecran.",
   d1:"Vino la standul FORVIA HELLA", d1s:"Arată-i codul unui coleg.", d2:"Povestim 2–3 minute", d2s:"Despre cum ai gândit, nu despre răspunsul „corect”.", d3:"Primești un cadou", d3s:"După discuție, colegul îți dă premiul.",
-  zoom:"Mărește codul", zoomTxt:"Arată codul unui coleg de la standul FORVIA HELLA", other:"Încearcă și celălalt domeniu", again:"De la capăt",
+  zoom:"Mărește codul", zoomTxt:"Arată codul unui coleg de la standul FORVIA HELLA", other:"Trage alte 3 cărți", again:"De la capăt",
   // host
   hPill:"COD VALID · CAREER CONNECT", hT:"Discuția începe aici.", hL:"Nu evalua răspunsurile, nu există variante corecte. Ascultă cum a gândit și pune 2–3 întrebări.",
-  hF:"Domeniu", hTm:"Timp", hLg:"Limbă", hWhy:"În cuvintele lui sau ale ei", hNoWhy:"A preferat să explice direct. Poți începe cu: „Care a fost cea mai grea decizie?”",
-  hAsk:"Întrebări de început", hCh:"Ce a ales", hLook:"La ce să fii atent",
+  hF:"Cărți", hTm:"Timp", hLg:"Limbă", hWhy:"În cuvintele lui sau ale ei", hNoWhy:"A preferat să povestească direct. Poți începe cu: „Ce carte ți-a plăcut cel mai mult?”",
+  hAsk:"Întrebări de început", hCh:"Cărțile jucate", hLook:"La ce să fii atent",
   look:["Curiozitate","Logică","Claritate","Inițiativă","Cum cântărește compromisurile"],
   rwQ:"Ați stat de vorbă?", rwB:"Da, oferă cadoul", rwD:"Cadou oferit. Mulțumim!", rwN:"Nu se salvează nimic. Butonul e doar pentru tine.",
   badT:"Codul nu poate fi citit.", badL:"Roagă studentul să genereze din nou codul QR.",
@@ -713,6 +812,13 @@ const T = {
   tapRank:"Atinge activitățile în ordinea în care le-ai face", rankReset:"Resetează ordinea", ranked:n=>`${n} din 4 ordonate`,
   stCar:"Șoferul din sens opus", stBike:"Biciclistul", stRoad:"Drum luminat", vDaz:"Orbit", vSafe:"Protejat", vVis:"Vizibil", vHard:"Greu de văzut",
   segs:"segmente stinse", line:"Linia",
+  dkE:"Cărțile tale", dkT:"Trei cărți. Trei feluri de a gândi.", dkL:"Ai primit, la întâmplare, câte o carte de imaginație, de logică și de decizie. Fiecare durează cam un minut.",
+  oneMin:"~1 minut", play:"Joacă prima carte", reshuffle:"Amestecă din nou", cardOf:n=>`Cartea ${n} din 3`, seqQ:"Completează șirul.",
+  ideaPh:"Scrie o idee și apasă +", ideaMax:"Gata, ai 5 idei", add:"Adaugă", ideasN:n=>`${n} din 5 idei`, oneMinHint:"Un minut, doar ca reper",
+  ownOpt:"Altceva, cu cuvintele mele", ownPh:"Problema, așa cum o vezi tu", ownRule:"Altă regulă", ownRulePh:"Răspunsul tău și regula",
+  estL:"Estimarea ta", estDrag:"Mută cursorul", estF:"Pe ce te-ai bazat? Alege până la 3",
+  objPick:n=>n===0?"Alege cel mult două obiecte":n===1?"Un obiect ales · mai poți alege unul":"Două obiecte alese", objHow:"Cum le folosești? (opțional)", objPh:"Pe scurt…",
+  cardsDone:"3 cărți",
  },
  en:{
   date:"11 November 2026 · CRAfT Timișoara",
@@ -726,10 +832,10 @@ const T = {
   rsT:"Start over?", rsP:"Your answers so far will be cleared and you'll go back to the first page. You can then pick another challenge.", rsY:"Yes, start over", rsN:"No, keep going",
   heroChip:"Timișoara Career Connect · 11.11.2026", turn:"Turn the switch to start",
   h1a:"Show us", h1b:"how you", h1c:"think.",
-  heroSub:"A 3-minute challenge based on our real projects. Then a short chat at our booth with the people who work on them.",
+  heroSub:"Three cards, three minutes, no wrong answers. Then a short chat at our booth with the FORVIA HELLA team.",
   start:"Start", total:"Takes about 5 minutes",
   howE:"How it works", howT:"Four steps. No wrong answers.",
-  how:[["i-play","Meet us","Find out in 60 seconds who FORVIA HELLA is in Romania."],["i-layers","Pick a field","Electronics or Software, whichever pulls you in."],["i-clock","Take the challenge","Three decisions, about 3 minutes. We care about how you think."],["i-gift","Talk to us","Walk us through your choices, then get a gift from us."]],
+  how:[["i-play","Meet us","Find out in 60 seconds who FORVIA HELLA is in Romania."],["i-cards","Get 3 cards","Imagination, logic and decision, drawn at random."],["i-clock","Play them","About a minute per card. We care about how you think, not what you know."],["i-gift","Talk to us","Walk us through your choices, then get a gift from us."]],
   kf:[["4,500+","FORVIA HELLA employees in Romania"],["1 in 2","vehicles worldwide carry FORVIA products"],["2005","the year we started in Timișoara"]],
   finT:"Ready to start?", finP:"All you need is your phone and 5 minutes.",
   stNext:"Next", stHint:"Tap the screen to move on", stGo:"Got it, let's go",
@@ -768,14 +874,14 @@ const T = {
   soon:"Coming soon", next3:"Coming next", min:"~3 min", steps:"3 decisions", doneTag:"Done", newTag:"Available",
   begin:"Start the challenge", cont:"Continue", gen:"Generate my QR code", skip:"I'd rather explain at the booth",
   stepOf:(a,b)=>`Step ${a} of ${b}`,
-  rules:["No wrong answers","No timer","Data stays on your phone"],
-  rE:"Last step", rQ:"Which decision was the hardest, and why?", rC:"One sentence is enough. We'll talk about it at the booth in a few minutes.", rPh:"E.g. I chose… because…", yours:"Your choices",
-  dE:"Challenge complete", dT:"Done! Now let's talk.", dL:"The code below holds your choices. It never leaves your phone: a colleague at the booth scans it straight from your screen.",
+  rules:["No wrong answers","No time pressure","Data stays on your phone"],
+  rE:"Last step", rQ:"Which card did you enjoy most, and why?", rC:"One sentence is enough. We'll talk about it at the booth in a few minutes.", rPh:"E.g. The estimate, because…", yours:"Your choices",
+  dE:"All 3 cards played", dT:"Done! Now let's talk.", dL:"The code below holds your choices. It never leaves your phone: a colleague at the booth scans it straight from your screen.",
   d1:"Come to the FORVIA HELLA booth", d1s:"Show the code to a colleague.", d2:"Talk for 2–3 minutes", d2s:"About how you thought, not about the \"right\" answer.", d3:"Get a gift", d3s:"After the chat, your colleague hands you the prize.",
-  zoom:"Enlarge code", zoomTxt:"Show this code to a colleague at the FORVIA HELLA booth", other:"Try the other field too", again:"Start over",
+  zoom:"Enlarge code", zoomTxt:"Show this code to a colleague at the FORVIA HELLA booth", other:"Draw 3 new cards", again:"Start over",
   hPill:"VALID CODE · CAREER CONNECT", hT:"The conversation starts here.", hL:"Don't grade the answers, there are no right options. Listen to how they thought and ask 2–3 questions.",
-  hF:"Field", hTm:"Time", hLg:"Language", hWhy:"In their own words", hNoWhy:"They'd rather explain in person. Open with: \"Which decision was the hardest?\"",
-  hAsk:"Conversation starters", hCh:"What they chose", hLook:"What to notice",
+  hF:"Cards", hTm:"Time", hLg:"Language", hWhy:"In their own words", hNoWhy:"They'd rather tell you in person. Open with: \"Which card did you enjoy most?\"",
+  hAsk:"Conversation starters", hCh:"The cards played", hLook:"What to notice",
   look:["Curiosity","Logic","Clarity","Initiative","How they weigh trade-offs"],
   rwQ:"Did you talk?", rwB:"Yes, hand over the gift", rwD:"Gift handed over. Thank you!", rwN:"Nothing is saved. This button is just for you.",
   badT:"This code can't be read.", badL:"Ask the student to generate the QR code again.",
@@ -784,121 +890,142 @@ const T = {
   tapRank:"Tap the activities in the order you'd do them", rankReset:"Reset order", ranked:n=>`${n} of 4 ranked`,
   stCar:"Oncoming driver", stBike:"Cyclist", stRoad:"Road lit", vDaz:"Dazzled", vSafe:"Protected", vVis:"Visible", vHard:"Hard to see",
   segs:"segments off", line:"Line",
+  dkE:"Your cards", dkT:"Three cards. Three ways of thinking.", dkL:"You've been dealt one imagination, one logic and one decision card, at random. Each takes about a minute.",
+  oneMin:"~1 minute", play:"Play the first card", reshuffle:"Shuffle again", cardOf:n=>`Card ${n} of 3`, seqQ:"Complete the sequence.",
+  ideaPh:"Type an idea and tap +", ideaMax:"That's 5 ideas, nice", add:"Add", ideasN:n=>`${n} of 5 ideas`, oneMinHint:"One minute, just as a guide",
+  ownOpt:"Something else, in my own words", ownPh:"The problem as you see it", ownRule:"A different rule", ownRulePh:"Your answer and your rule",
+  estL:"Your estimate", estDrag:"Move the slider", estF:"What did you base it on? Pick up to 3",
+  objPick:n=>n===0?"Pick up to two items":n===1?"One item picked · you can add one more":"Two items picked", objHow:"How would you use them? (optional)", objPh:"In a few words…",
+  cardsDone:"3 cards",
  }
 };
 
-/* ================= challenges ================= */
-const CODE = [
-  ['<span class="tk-k">void</span> <span class="tk-f">blinker_task</span>(<span class="tk-k">void</span>) {','void blinker_task(void) {'],
-  ['  <span class="tk-c">// runs every 10 ms</span>','  // runs every 10 ms'],
-  ['  <span class="tk-k">if</span> (switch_on) {','  if (switch_on) {'],
-  ['    timer <span class="tk-o">+=</span> <span class="tk-n">10</span>;','    timer += 10;'],
-  ['    <span class="tk-k">if</span> (timer <span class="tk-o">&gt;=</span> <span class="tk-n">333</span>) {','    if (timer >= 333) {'],
-  ['      led <span class="tk-o">=</span> <span class="tk-o">!</span>led;','      led = !led;'],
-  ['      timer <span class="tk-o">=</span> <span class="tk-n">0</span>;','      timer = 0;'],
-  ['    }','    }'],
-  ['  }','  }'],
-  ['}','}'],
-];
-const CH = {
- e:{ icon:"i-chip", name:{ro:"Electronics",en:"Electronics"},
-  title:{ro:"Lumina care nu orbește",en:"Light that doesn't blind"},
-  sub:{ro:"Faruri matrix LED, camere și decizii luate în milisecunde.",en:"Matrix LED headlamps, cameras and split-second decisions."},
-  who:{ro:"Echipa de Lighting Electronics",en:"Lighting Electronics team"},
-  brief:{ro:"E noapte, pe un drum județean, iar tu mergi cu 90 km/h. Farul are <b>12 segmente LED</b> pe care le poți aprinde sau stinge separat, iar camera din parbriz vede tot ce e în față. Tu decizi ce face lumina.",
-         en:"It's night on a country road and you're driving at 90 km/h. The headlamp has <b>12 LED segments</b> you can switch on or off one by one, and the windshield camera sees everything ahead. You decide what the light does."},
-  facts:[{b:"12",ro:"segmente LED",en:"LED segments"},{b:"90",ro:"km/h, noaptea",en:"km/h, at night"},{b:"3",ro:"decizii",en:"decisions"}],
-  steps:[
-   {kind:"beam", q:{ro:"Tu decizi unde bate lumina.",en:"You decide where the light goes."},
-    ctx:{ro:"Din sens opus vine o mașină. Pe marginea drumului, în dreapta, merge un biciclist cu vestă reflectorizantă, iar mai în față e un indicator. <b>Atinge segmentele pe care vrei să le stingi.</b>",
-         en:"A car is coming the other way. On the right side of the road there's a cyclist in a reflective vest, and a road sign further ahead. <b>Tap the segments you want to switch off.</b>"}},
-   {kind:"choice", q:{ro:"Într-o curbă, camera nu mai vede mașina din sens opus timp de 0,3 secunde. Ce face farul?",en:"In a bend, the camera loses sight of the oncoming car for 0.3 seconds. What does the headlamp do?"},
-    ctx:{ro:"Fiecare variantă are un preț. Alege-o pe cea pe care ai susține-o în fața echipei.",en:"Every option comes at a price. Pick the one you'd defend in front of the team."},
-    opts:[
-     {i:"i-pause",t:{ro:"Păstrează zona întunecată",en:"Keep the dark zone in place"},d:{ro:"Celălalt șofer rămâne protejat, dar s-ar putea să ții întuneric degeaba.",en:"The other driver stays protected, but you may keep it dark for nothing."},g:{ro:"Prudent",en:"Cautious"}},
-     {i:"i-bolt",t:{ro:"Aprinde imediat faza lungă completă",en:"Switch the full high beam back on"},d:{ro:"Vezi cel mai mult din drum, dar riști să-l orbești pe celălalt.",en:"You see the most road, but risk dazzling the other driver."},g:{ro:"Vizibilitate",en:"Visibility"}},
-     {i:"i-shield",t:{ro:"Comută pe faza scurtă până reapare mașina",en:"Drop to low beam until the car reappears"},d:{ro:"Simplu și sigur, dar pierzi vizibilitate tocmai în curbă.",en:"Simple and safe, but you lose visibility right in the bend."},g:{ro:"Simplu",en:"Simple"}},
-     {i:"i-flow",t:{ro:"Anticipează traiectoria și mută zona întunecată",en:"Predict the path and move the dark zone"},d:{ro:"Elegant, dar totul depinde de cât de bună e predicția.",en:"Elegant, but everything depends on how good the prediction is."},g:{ro:"Predictiv",en:"Predictive"}},
-    ]},
-   {kind:"choice", q:{ro:"Ai buget să îmbunătățești un singur lucru la următoarea generație de faruri. Ce alegi?",en:"You have budget to improve just one thing in the next headlamp generation. What do you pick?"},
-    ctx:{ro:"Gândește-te la șofer, la client și la cât costă mașina.",en:"Think about the driver, the customer and the price of the car."},
-    opts:[
-     {i:"i-layers",t:{ro:"Mai multe segmente",en:"More segments"},d:{ro:"Umbre mai precise în jurul fiecărui obiect.",en:"Sharper shadows around every object."},g:{ro:"Rezoluție",en:"Resolution"}},
-     {i:"i-bolt",t:{ro:"Procesare mai rapidă",en:"Faster processing"},d:{ro:"Farul reacționează mai repede în curbe și la viteză mare.",en:"The lamp reacts faster in bends and at high speed."},g:{ro:"Viteză",en:"Speed"}},
-     {i:"i-coin",t:{ro:"Cost mai mic",en:"Lower cost"},d:{ro:"Tehnologia ajunge și pe mașinile mai accesibile.",en:"The technology reaches more affordable cars too."},g:{ro:"Accesibilitate",en:"Reach"}},
-     {i:"i-temp",t:{ro:"Consum și căldură mai mici",en:"Less power and heat"},d:{ro:"Farul durează mai mult și poate fi mai compact.",en:"The lamp lasts longer and can be more compact."},g:{ro:"Eficiență",en:"Efficiency"}},
-    ]},
+/* ================= cards ================= */
+/* three families, two card types each, 4–5 variants per type; nothing here has a single right answer */
+const FAM={
+ 1:{n:{ro:"Imaginație",en:"Imagination"},i:"i-spark",c:"f1",
+    o:{ro:"Câte idei are, cât de diferite sunt între ele și cât de departe pleacă de la evident.",en:"How many ideas they have, how different they are and how far they move from the obvious."}},
+ 2:{n:{ro:"Logică",en:"Logic"},i:"i-flow",c:"f2",
+    o:{ro:"Cum sparge problema în pași, ce presupune și cât de bine își poate explica regula.",en:"How they break the problem into steps, what they assume and how well they explain their rule."}},
+ 3:{n:{ro:"Decizie",en:"Decision"},i:"i-target",c:"f3",
+    o:{ro:"Cum cântărește compromisurile, pe cine ia în calcul și cât de practic gândește.",en:"How they weigh trade-offs, who they take into account and how practical they are."}},
+};
+const OPTICONS=["i-chat","i-flow","i-people","i-target","i-pen"];
+const TYPES={
+ alt:{f:1,i:"i-spark",kind:"ideas",
+  n:{ro:"Altfel de folosire",en:"Another use"},
+  d:{ro:"Găsește cât mai multe utilizări pentru un obiect banal.",en:"Find as many uses as you can for an everyday object."},
+  ctx:{ro:"Scrie cât mai multe idei, oricât de neobișnuite. Nu trebuie să fie practice.",en:"Write as many ideas as you can, however unusual. They don't have to be practical."},
+  vars:[
+   {q:{ro:"Ai o umbrelă stricată. În ce altceva o poți transforma?",en:"You have a broken umbrella. What else could it become?"}},
+   {q:{ro:"Ai un pahar de cafea gol. La ce altceva îl poți folosi?",en:"You have an empty coffee cup. What else could you use it for?"}},
+   {q:{ro:"Ai o agrafă de birou. Ce poți face cu ea, în afară de a prinde foi?",en:"You have a paper clip. What could you do with it, apart from holding paper together?"}},
+   {q:{ro:"Ai o cutie de pizza goală. Ce poate deveni?",en:"You have an empty pizza box. What could it become?"}},
+   {q:{ro:"Ai o pereche de șosete fără pereche. La ce le mai poți folosi?",en:"You have an odd sock with no partner. What could you still use it for?"}},
   ]},
- s:{ icon:"i-code", name:{ro:"Software",en:"Software"},
-  title:{ro:"Semnalizarea care nu se mai oprește",en:"The turn signal that won't stop"},
-  sub:{ro:"Software embedded, siguranță și un termen de lansare.",en:"Embedded software, safety and a release deadline."},
-  who:{ro:"Echipa de Embedded Software",en:"Embedded Software team"},
-  brief:{ro:"Din teste vine o sesizare: la unele mașini, <b>semnalizarea mai clipește o dată</b> după ce șoferul a anulat-o. Lansarea în producție e peste <b>10 zile</b>. Codul e scurt; deciziile, nu chiar.",
-         en:"A test report says that on some cars the <b>turn signal blinks once more</b> after the driver cancels it. Production release is in <b>10 days</b>. The code is short; the decisions aren't."},
-  facts:[{b:"10",ro:"zile până la lansare",en:"days to release"},{b:"1,5",ro:"clipiri pe secundă",en:"blinks per second"},{b:"3",ro:"decizii",en:"decisions"}],
-  steps:[
-   {kind:"code", q:{ro:"Unde te uiți prima dată?",en:"Where do you look first?"},
-    ctx:{ro:"Funcția de mai jos aprinde și stinge LED-ul semnalizării. <b>Atinge linia pe care ai verifica-o prima.</b>",en:"The function below switches the turn signal LED on and off. <b>Tap the line you'd check first.</b>"},
-    hint:{ro:"<code>switch_on</code> vine de la maneta de semnalizare. LED-ul își schimbă starea la fiecare 333 ms, deci clipește cam de 1,5 ori pe secundă.",en:"<code>switch_on</code> comes from the turn signal stalk. The LED changes state every 333 ms, so it blinks about 1.5 times per second."}},
-   {kind:"choice", q:{ro:"Ai găsit cauza. Cum o rezolvi, cu 10 zile înainte de lansare?",en:"You've found the cause. How do you fix it, 10 days before release?"},
-    ctx:{ro:"Nu există o variantă perfectă. Alege ce ai susține în fața echipei.",en:"There's no perfect option. Pick what you'd defend in front of the team."},
-    opts:[
-     {i:"i-bolt",t:{ro:"Un patch rapid: LED-ul se stinge imediat la anulare",en:"A quick patch: the LED turns off as soon as it's cancelled"},d:{ro:"O modificare mică, ușor de testat. Rezolvă simptomul.",en:"A small change, easy to test. Fixes the symptom."},g:{ro:"Rapid",en:"Fast"}},
-     {i:"i-flow",t:{ro:"Rescrii logica sub formă de state machine",en:"Rewrite the logic as a state machine"},d:{ro:"Mai curat și mai robust, dar cere mai mult timp de testare.",en:"Cleaner and sturdier, but it needs more testing time."},g:{ro:"Robust",en:"Robust"}},
-     {i:"i-shield",t:{ro:"Adaugi un watchdog care stinge LED-ul",en:"Add a watchdog that turns the LED off"},d:{ro:"O plasă de siguranță, dar ascunde cauza reală.",en:"A safety net, but it hides the real cause."},g:{ro:"Defensiv",en:"Defensive"}},
-     {i:"i-clock",t:{ro:"Amâni rezolvarea pentru următoarea versiune",en:"Push the fix to the next release"},d:{ro:"Lansarea nu e pusă în pericol, dar problema ajunge la clienți.",en:"The launch is safe, but the issue reaches customers."},g:{ro:"Amânat",en:"Deferred"}},
-    ]},
-   {kind:"rank", q:{ro:"Ai 10 zile pentru testare. În ce ordine lucrezi?",en:"You have 10 days for testing. In what order do you work?"},
-    ctx:{ro:"Nu ai timp să le faci pe toate în detaliu. Ordinea arată ce contează pentru tine.",en:"There's no time to do everything in depth. The order shows what matters to you."},
-    items:[
-     {i:"i-flask",t:{ro:"Teste unitare pentru corecție",en:"Unit tests for the fix"},d:{ro:"Rapide, izolate, doar pe codul modificat.",en:"Fast, isolated, only on the changed code."}},
-     {i:"i-bench",t:{ro:"Test pe bancul HIL",en:"HIL bench test"},d:{ro:"Hardware real, scenarii simulate.",en:"Real hardware, simulated scenarios."}},
-     {i:"i-car",t:{ro:"Test drive cu o mașină reală",en:"Test drive in a real car"},d:{ro:"Condiții reale, greu de reprodus identic.",en:"Real conditions, hard to reproduce exactly."}},
-     {i:"i-repeat",t:{ro:"Teste de regresie pe tot modulul de iluminat",en:"Regression tests on the whole lighting module"},d:{ro:"Verifici că n-ai stricat nimic altceva.",en:"Make sure nothing else broke."}},
-    ]},
+ ref:{f:1,i:"i-lens",kind:"pick",own:true,
+  n:{ro:"Reformulează",en:"Reframe"},
+  d:{ro:"Descoperă problema reală din spatele uneia de zi cu zi.",en:"Find the real problem behind an everyday one."},
+  ctx:{ro:"Fiecare variantă duce la altă soluție. Alege problema pe care ai rezolva-o mai întâi.",en:"Each framing leads to a different solution. Pick the problem you'd tackle first."},
+  vars:[
+   {s:{ro:"Coada de la cantină e mereu prea lungă.",en:"The canteen queue is always too long."},
+    o:[{ro:"Servirea durează prea mult",en:"Serving takes too long"},{ro:"Așteptarea e plictisitoare",en:"Waiting is boring"},{ro:"Toată lumea vine la aceeași oră",en:"Everyone turns up at the same time"},{ro:"Studenții nu au o alternativă la cantină",en:"Students have no alternative to the canteen"}]},
+   {s:{ro:"Toată lumea se plânge că lifturile din clădire sunt prea lente.",en:"Everyone complains that the lifts in the building are too slow."},
+    o:[{ro:"Lifturile chiar sunt lente",en:"The lifts really are slow"},{ro:"Așteptarea pare mai lungă decât e",en:"The wait feels longer than it is"},{ro:"Prea mulți oameni le iau în același timp",en:"Too many people use them at once"},{ro:"Mulți ar putea lua scările",en:"Many people could take the stairs"}]},
+   {s:{ro:"Aproape nimeni nu citește afișele din cămin.",en:"Hardly anyone reads the posters in the dorm."},
+    o:[{ro:"Afișele nu se văd",en:"The posters aren't visible"},{ro:"Sunt prea multe și se pierd între ele",en:"There are too many, so they get lost"},{ro:"Informația nu e interesantă",en:"The information isn't interesting"},{ro:"Oamenii se informează în altă parte",en:"People get their news somewhere else"}]},
+   {s:{ro:"La cursuri, laptopurile se descarcă mereu înainte de final.",en:"In lectures, laptops always run out of battery before the end."},
+    o:[{ro:"Sunt prea puține prize",en:"There aren't enough sockets"},{ro:"Cursurile sunt prea lungi, fără pauză",en:"Lectures run too long without a break"},{ro:"Bateriile sunt vechi",en:"The batteries are old"},{ro:"Nu e nevoie de laptop tot cursul",en:"You don't need a laptop for the whole lecture"}]},
+  ]},
+ est:{f:2,i:"i-gauge",kind:"est",
+  n:{ro:"Estimează",en:"Estimate"},
+  d:{ro:"Estimează ceva ce nu poți căuta pe Google.",en:"Estimate something you can't just google."},
+  ctx:{ro:"Nu există un număr corect și nu ai nevoie de internet. Alege o estimare și spune-ne pe ce te-ai bazat.",en:"There's no correct number and you don't need the internet. Pick an estimate and tell us what you based it on."},
+  vars:[
+   {q:{ro:"Câte cafele se vor bea azi la CRAfT, în timpul târgului?",en:"How many coffees will be drunk at CRAfT today, during the fair?"},min:50,max:20000,
+    fs:[{ro:"Câți oameni vin azi",en:"How many people come today"},{ro:"Câți dintre ei beau cafea",en:"How many of them drink coffee"},{ro:"Câte cafele bea fiecare",en:"How many cups each"},{ro:"Câte ore stau",en:"How many hours they stay"},{ro:"Câte locuri servesc cafea",en:"How many places serve coffee"}]},
+   {q:{ro:"Câte biciclete sunt în Timișoara?",en:"How many bicycles are there in Timișoara?"},min:1000,max:1000000,
+    fs:[{ro:"Câți locuitori are orașul",en:"The city's population"},{ro:"Câte gospodării sunt",en:"How many households there are"},{ro:"Câți studenți sunt",en:"How many students there are"},{ro:"Câți merg zilnic cu bicicleta",en:"How many cycle every day"},{ro:"Bicicletele de închiriat",en:"Rental bikes"}]},
+   {q:{ro:"Câți pași faci într-un an?",en:"How many steps do you take in a year?"},min:100000,max:20000000,
+    fs:[{ro:"Câți pași fac într-o zi obișnuită",en:"How many steps on a normal day"},{ro:"Zilele de cursuri față de vacanță",en:"Term days versus holidays"},{ro:"Sportul pe care îl fac",en:"The sport I do"},{ro:"Distanța până la facultate",en:"The distance to university"},{ro:"Câți pași are un kilometru",en:"How many steps make a kilometre"}]},
+   {q:{ro:"Câte mesaje primești pe telefon într-o lună?",en:"How many messages do you get on your phone in a month?"},min:100,max:100000,
+    fs:[{ro:"În câte grupuri sunt",en:"How many group chats I'm in"},{ro:"Cât de activ e cel mai vorbăreț grup",en:"How busy the chattiest group is"},{ro:"Mesajele de la prieteni apropiați",en:"Messages from close friends"},{ro:"Notificările aplicațiilor",en:"App notifications"},{ro:"Zilele de curs față de weekend",en:"Weekdays versus weekends"}]},
+  ]},
+ seq:{f:2,i:"i-seq",kind:"seq",own:true,
+  n:{ro:"Ce urmează?",en:"What comes next?"},
+  d:{ro:"Găsește o regulă. Aici există mai multe răspunsuri bune.",en:"Find a rule. There's more than one good answer here."},
+  ctx:{ro:"Există mai multe răspunsuri bune. Contează regula pe care o vezi tu.",en:"There's more than one good answer. What matters is the rule you see."},
+  vars:[
+   {tok:{ro:["1","2","4"],en:["1","2","4"]},
+    o:[{a:"7",r:{ro:"Adaugi +1, apoi +2, apoi +3",en:"Add 1, then 2, then 3"}},{a:"8",r:{ro:"Dublezi de fiecare dată",en:"Double each time"}},{a:"5",r:{ro:"Alternezi +1 și +2",en:"Alternate +1 and +2"}}]},
+   {tok:{ro:["2","3","5"],en:["2","3","5"]},
+    o:[{a:"7",r:{ro:"Sunt numere prime",en:"They're prime numbers"}},{a:"8",r:{ro:"Fiecare număr e suma ultimelor două",en:"Each number is the sum of the last two"}},{a:"8",r:{ro:"Adaugi +1, apoi +2, apoi +3",en:"Add 1, then 2, then 3"}}]},
+   {tok:{ro:["U","D","T","P","C"],en:["O","T","T","F","F"]},
+    o:[{a:{ro:"Ș",en:"S"},r:{ro:"Inițialele numerelor: unu, doi, trei, patru, cinci, șase",en:"First letters of one, two, three, four, five, six"}},{a:{ro:"U",en:"O"},r:{ro:"Șirul o ia de la capăt",en:"The pattern starts again"}}]},
+   {tok:{ro:["tri","sq","pent"],en:["tri","sq","pent"]},shapes:true,
+    o:[{a:"hex",r:{ro:"Fiecare formă are o latură în plus",en:"Each shape has one more side"}},{a:"tri",r:{ro:"Ciclul o ia de la capăt",en:"The cycle starts again"}},{a:"circ",r:{ro:"Laturile se înmulțesc până devin o curbă",en:"The sides multiply until they become a curve"}}]},
+  ]},
+ obj:{f:3,i:"i-box",kind:"obj",
+  n:{ro:"Ai doar ce ai",en:"Use what you have"},
+  d:{ro:"Rezolvă o problemă doar cu ce ai la îndemână.",en:"Solve a problem with only what's at hand."},
+  ctx:{ro:"Alege cel mult două obiecte. Le poți folosi oricum, nu doar cum au fost gândite.",en:"Pick up to two items. Use them any way you like, not just the way they were designed."},
+  vars:[
+   {q:{ro:"Trebuie să agăți un poster pe perete, fără cuie și fără să găurești.",en:"You need to put up a poster on a wall, with no nails and no drilling."},
+    it:[{ro:"Bandă de hârtie",en:"Masking tape"},{ro:"Agrafe de birou",en:"Paper clips"},{ro:"O cutie de pizza",en:"A pizza box"},{ro:"Șireturi",en:"Shoelaces"},{ro:"Magneți de frigider",en:"Fridge magnets"},{ro:"Un umeraș",en:"A coat hanger"}]},
+   {q:{ro:"Telefonul are 3% baterie și trebuie să ajungi în 30 de minute la o adresă nouă din oraș.",en:"Your phone is at 3% and you need to reach a new address in town within 30 minutes."},
+    it:[{ro:"Un pix",en:"A pen"},{ro:"O hartă turistică",en:"A tourist map"},{ro:"Abonamentul de autobuz",en:"Your bus pass"},{ro:"10 lei",en:"10 lei in cash"},{ro:"Căștile",en:"Your headphones"},{ro:"Un coleg care știe orașul",en:"A friend who knows the city"}]},
+   {q:{ro:"Te prinde ploaia între cursuri, cu laptopul în rucsac și fără umbrelă.",en:"You're caught in the rain between lectures, laptop in your backpack, no umbrella."},
+    it:[{ro:"O pungă de plastic",en:"A plastic bag"},{ro:"Un ziar",en:"A newspaper"},{ro:"Geaca ta",en:"Your jacket"},{ro:"O cutie de carton",en:"A cardboard box"},{ro:"Bandă adezivă",en:"Sticky tape"},{ro:"Un coleg cu umbrelă",en:"A friend with an umbrella"}]},
+   {q:{ro:"Trebuie să ții atenția a 30 de oameni timp de 5 minute, fără proiector și fără microfon.",en:"You need to hold the attention of 30 people for 5 minutes, with no projector and no microphone."},
+    it:[{ro:"O tablă",en:"A whiteboard"},{ro:"30 de bilețele",en:"30 sticky notes"},{ro:"O minge",en:"A ball"},{ro:"Telefonul tău",en:"Your phone"},{ro:"Un clopoțel",en:"A small bell"},{ro:"Un scaun",en:"A chair"}]},
+  ]},
+ dil:{f:3,i:"i-fork",kind:"pick",
+  n:{ro:"Dilema",en:"The dilemma"},
+  d:{ro:"Alege ce ai face într-o situație fără răspuns perfect.",en:"Choose what you'd do when there's no perfect answer."},
+  ctx:{ro:"Toate variantele sunt rezonabile. Alege ce ai face tu, de fapt.",en:"Every option is reasonable. Pick what you'd actually do."},
+  vars:[
+   {s:{ro:"Proiect de echipă, termenul e mâine, iar un coleg nu mai răspunde de trei zile. Ce faci mai întâi?",en:"Team project, deadline tomorrow, and one teammate hasn't replied for three days. What do you do first?"},
+    o:[{ro:"Îi scriu direct și îi dau o oră limită",en:"Message them directly with a clear cut-off time"},{ro:"Îi preiau partea și o fac eu",en:"Take over their part and do it myself"},{ro:"Împărțim partea lui între noi",en:"Split their part between the rest of us"},{ro:"Vorbesc cu profesorul despre situație",en:"Talk to the professor about the situation"}]},
+   {s:{ro:"Mai ai două ore până la examen. Ce faci cu ele?",en:"You have two hours left before an exam. How do you use them?"},
+    o:[{ro:"Mai trec o dată prin tot, pe scurt",en:"Skim through everything once more"},{ro:"Mă concentrez pe ce știu cel mai prost",en:"Focus on what I know least"},{ro:"Rezolv subiecte din anii trecuți",en:"Work through past exam papers"},{ro:"Mă odihnesc și mănânc ceva",en:"Rest and eat something"}]},
+   {s:{ro:"Ești voluntar la un eveniment care începe într-o oră, iar jumătate dintre voluntari nu au venit.",en:"You're volunteering at an event that starts in an hour, and half the volunteers haven't shown up."},
+    o:[{ro:"Reîmpart sarcinile după priorități",en:"Reassign tasks by priority"},{ro:"Cer ajutor participanților",en:"Ask attendees to help"},{ro:"Renunț la o activitate ca restul să iasă bine",en:"Drop one activity so the rest goes well"},{ro:"Îi sun pe cei care lipsesc",en:"Call the volunteers who are missing"}]},
+   {s:{ro:"Observi o greșeală într-o lucrare de grup, după ce ați predat-o.",en:"You spot a mistake in a group assignment after you've handed it in."},
+    o:[{ro:"Le spun colegilor și decidem împreună",en:"Tell my teammates and decide together"},{ro:"Îi scriu direct profesorului",en:"Email the professor directly"},{ro:"O corectez și retrimit lucrarea",en:"Fix it and resubmit"},{ro:"Îmi notez lecția, ca să nu se repete",en:"Note the lesson so it doesn't happen again"}]},
   ]},
 };
-const SOON=[{i:"i-gear",n:"Mechanical"},{i:"i-data",n:"Data & AI"},{i:"i-brief",n:"Business"},{i:"i-people",n:"People"}];
+const BYFAM={1:["alt","ref"],2:["est","seq"],3:["obj","dil"]};
+const SHAPE={tri:'<polygon points="12,3 22,20 2,20"/>',sq:'<rect x="4" y="4" width="16" height="16" rx="1"/>',pent:'<polygon points="12,2.5 21.5,9.5 18,20.5 6,20.5 2.5,9.5"/>',hex:'<polygon points="7,3 17,3 22,12 17,21 7,21 2,12"/>',circ:'<circle cx="12" cy="12" r="9.5"/>'};
+const shapeSVG=k=>`<svg class="shp" viewBox="0 0 24 24" aria-label="${k}">${SHAPE[k]||""}</svg>`;
+const SHAPENAME={tri:{ro:"Triunghi",en:"Triangle"},sq:{ro:"Pătrat",en:"Square"},pent:{ro:"Pentagon",en:"Pentagon"},hex:{ro:"Hexagon",en:"Hexagon"},circ:{ro:"Cerc",en:"Circle"}};
+const lx=(o,lang)=>typeof o==="string"?o:o[lang||L()];
 
-const ASK = {
- e:{
-  beam:(off,L)=>{const R=L==="ro",car4=off.includes(4),car5=off.includes(5),bike=off.includes(9),n=off.length,r=[];
-   if(!car4&&!car5) r.push(R?"Ai lăsat lumina pe mașina din sens opus. Ce te-a făcut să alegi asta?":"You kept the light on the oncoming car. What made you choose that?");
-   else if(!(car4&&car5)) r.push(R?"Ai stins doar o parte din zona mașinii. Cum ai hotărât cât să stingi?":"You switched off only part of the car's zone. How did you decide how much?");
-   else if(n>4) r.push(R?`Ai stins ${n} segmente. Unde e, pentru tine, echilibrul dintre siguranța celorlalți și ce vede șoferul?`:`You switched off ${n} segments. Where's the balance for you between other people's safety and what the driver sees?`);
-   else r.push(R?"Ai protejat mașina din sens opus și ai lăsat restul drumului luminat. Ce s-ar schimba la 130 km/h?":"You protected the oncoming car and kept the rest of the road lit. What would change at 130 km/h?");
-   r.push(bike?(R?"Ai stins și segmentul biciclistului. Cum ai cântărit confortul lui față de cât vede șoferul?":"You also switched off the cyclist's segment. How did you weigh their comfort against what the driver sees?")
-              :(R?"Biciclistul a rămas în lumină. Ce faci dacă lumina îl orbește?":"The cyclist stayed in the light. What if the light dazzles them?"));
-   return r;},
-  s1:[{ro:"Cât timp ai păstra zona întunecată dacă mașina nu mai apare?",en:"How long would you keep the dark zone if the car doesn't reappear?"},
-      {ro:"Cum i-ai explica alegerea șoferului pe care l-ai putea orbi?",en:"How would you explain your choice to the driver you might dazzle?"},
-      {ro:"În ce situație faza scurtă ar fi alegerea greșită?",en:"In what situation would low beam be the wrong call?"},
-      {ro:"De ce date ai avea nevoie ca să ai încredere în predicție?",en:"What data would you need to trust the prediction?"}],
-  s2:[{ro:"Când devin segmentele în plus doar un cost în plus?",en:"When do extra segments become just extra cost?"},
-      {ro:"Cum i-ai demonstra unui client că viteza contează cel mai mult?",en:"How would you prove to a customer that speed matters most?"},
-      {ro:"La ce ai renunța ca farul să fie mai ieftin?",en:"What would you give up to make the lamp cheaper?"},
-      {ro:"De ce crezi că eficiența contează la un far?",en:"Why do you think efficiency matters in a headlamp?"}],
- },
- s:{
-  code:(line,L)=>{const R=L==="ro",ln=(CODE[line]||["",""])[1].trim(),n=line+1;
-   if(line===2) return R?`Ai ales linia ${n}: „${ln}”. Ce se întâmplă cu LED-ul când switch_on devine false?`:`You picked line ${n}: "${ln}". What happens to the LED when switch_on turns false?`;
-   if(line===8) return R?"Ai ales finalul blocului if. Ce crezi că lipsește acolo?":"You picked the end of the if block. What do you think is missing there?";
-   if([3,4,6].includes(line)) return R?`Ai ales linia ${n}: „${ln}”. De ce ai bănuit timer-ul?`:`You picked line ${n}: "${ln}". Why did you suspect the timer?`;
-   if(line===5) return R?"Ai ales chiar linia care schimbă starea LED-ului. Ce ai verifica acolo?":"You picked the line that toggles the LED. What would you check there?";
-   return R?`Ai ales linia ${n}. Ce anume ai căuta acolo?`:`You picked line ${n}. What exactly would you look for there?`;},
-  s1:[{ro:"Cum te asiguri că patch-ul rapid nu ascunde o problemă mai mare?",en:"How do you make sure the quick patch doesn't hide a bigger problem?"},
-      {ro:"Cum ai convinge echipa că merită riscul unei rescrieri chiar acum?",en:"How would you convince the team that a rewrite is worth the risk right now?"},
-      {ro:"Când e un watchdog o soluție bună și când e doar o scuză?",en:"When is a watchdog a good fix, and when is it just an excuse?"},
-      {ro:"Cum i-ai spune clientului că problema rămâne până la următoarea versiune?",en:"How would you tell the customer the issue stays until the next release?"}],
-  rank:(o,items,L)=>{const f=items[o[0]].t[L],l=items[o[3]].t[L];
-   return L==="ro"?`Ai început cu „${f}” și ai lăsat „${l}” la final. Ce ai pierde dacă ai inversa ordinea?`:`You started with "${f}" and left "${l}" for last. What would you lose by reversing the order?`;},
- }
+/* conversation starters for the booth, per card */
+const ASK={
+ alt:(a,v,lang)=>{const R=lang==="ro",n=(a.i||[]).length;return [
+   R?`Ai găsit ${n} ${n===1?"idee":"idei"}. Care e preferata ta și de ce?`:`You came up with ${n} ${n===1?"idea":"ideas"}. Which one is your favourite, and why?`,
+   R?"Dacă ar trebui să transformi una dintre idei într-un produs, pe care ai alege-o?":"If you had to turn one of these ideas into a product, which would you pick?"];},
+ ref:(a,v,lang)=>{const R=lang==="ro",x=a.c===4?a.x:lx(v.o[a.c],lang);return [
+   R?`Ai ales: „${x}”. Ce te-a convins că asta e problema reală?`:`You chose "${x}". What convinced you that's the real problem?`,
+   R?"Cum ai verifica, încă din prima zi, că ai dreptate?":"How would you check, on day one, that you're right?"];},
+ est:(a,v,lang)=>{const R=lang==="ro",n=Number(a.n||0).toLocaleString(R?"ro-RO":"en-US");return [
+   R?`Ai estimat ${n}. Cum ai ajuns la numărul ăsta, pas cu pas?`:`You estimated ${n}. How did you get to that number, step by step?`,
+   R?"Ce informație ți-ar schimba cel mai mult estimarea?":"Which piece of information would change your estimate the most?"];},
+ seq:(a,v,lang)=>{const R=lang==="ro";const ans=a.c===-1?a.x:seqAns(v,a.c,lang)+" · "+lx(v.o[a.c].r,lang);return [
+   R?`Ai ales: ${ans}. Mai vezi o regulă care să funcționeze?`:`You chose: ${ans}. Can you see another rule that works?`,
+   R?"Cum i-ai explica alegerea cuiva care a ales altceva?":"How would you explain your choice to someone who picked differently?"];},
+ obj:(a,v,lang)=>{const R=lang==="ro",it=(a.s||[]).map(i=>lx(v.it[i],lang)).join(R?" și ":" and ");return [
+   R?`Ai ales ${it.toLowerCase()}. Cum ar arăta soluția ta, concret?`:`You picked ${it.toLowerCase()}. What would your solution look like in practice?`,
+   R?"Ce ai face dacă n-ai avea niciunul dintre aceste obiecte?":"What would you do if you had none of these items?"];},
+ dil:(a,v,lang)=>{const R=lang==="ro",x=lx(v.o[a.c],lang);return [
+   R?`Ai ales: „${x}”. Ce ar trebui să se întâmple ca să alegi altceva?`:`You chose "${x}". What would have to happen for you to choose differently?`,
+   R?"Cum le-ai explica decizia celorlalți implicați?":"How would you explain the decision to the others involved?"];},
 };
+function seqAns(v,i,lang){const o=v.o[i];if(!o)return "";const a=lx(o.a,lang);return v.shapes?lx(SHAPENAME[a],lang):a;}
 
 /* ================= state ================= */
-const KEY="fh-tcc-v1";
-const blankA=f=>f==="e"?{off:[],c1:null,c2:null}:{line:null,c1:null,rank:[]};
-const fresh=(lang,eco,dark)=>({lang:lang||"ro",eco:!!eco,dark:!!dark,view:"home",seen:false,quiz:null,field:null,step:0,a:{e:blankA("e"),s:blankA("s")},why:"",t0:null,dur:0,id:null,done:[]});
+const KEY="fh-tcc-v2";
+const fresh=(lang,eco,dark)=>({lang:lang||"ro",eco:!!eco,dark:!!dark,view:"home",seen:false,quiz:null,deck:null,ans:[null,null,null],used:[],played:false,step:0,why:"",t0:null,dur:0,id:null,rounds:0});
 let S=fresh();
 try{const r=localStorage.getItem(KEY);if(r)S=Object.assign(fresh(),JSON.parse(r));}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}};
@@ -919,9 +1046,6 @@ function loadFonts(){ if(S.eco||document.getElementById("gf")) return;
 /* ================= payload / QR ================= */
 const b64e=s=>btoa(unescape(encodeURIComponent(s))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
 const b64d=s=>decodeURIComponent(escape(atob(s.replace(/-/g,"+").replace(/_/g,"/"))));
-function payload(){const f=S.field,a=S.a[f];
-  const ans=f==="e"?[a.off.reduce((m,i)=>m|(1<<i),0),a.c1,a.c2]:[a.line,a.c1,a.rank];
-  return {v:1,f,a:ans,w:S.why.trim().slice(0,140),t:Math.min(S.dur||0,3599),l:L(),id:S.id};}
 const hostURL=p=>location.href.split("#")[0]+"#r="+b64e(JSON.stringify(p));
 function newId(){const abc="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let s="";const r=crypto.getRandomValues(new Uint8Array(4));for(const x of r)s+=abc[x%abc.length];return s;}
 function qrSVG(text,anim){const q=qrcode(0,"L");q.addData(text);q.make();const n=q.getModuleCount(),p=3,z=n+p*2;let d="";
@@ -980,7 +1104,7 @@ document.addEventListener("click",e=>{const p=document.getElementById("lcp");if(
 document.getElementById("theme").onclick=()=>{S.dark=!S.dark;save();render(true);};
 const doReset=()=>{closeStory();go(()=>{S=fresh(S.lang,S.eco,S.dark);});};
 document.getElementById("reset").onclick=()=>{
-  if(S.view==="home"&&!S.field){window.scrollTo({top:0,behavior:S.eco?"instant":"smooth"});return;}
+  if(S.view==="home"&&!S.deck){window.scrollTo({top:0,behavior:S.eco?"instant":"smooth"});return;}
   const d=document.getElementById("dlg");
   document.getElementById("dlgt").textContent=t("rsT");document.getElementById("dlgp").textContent=t("rsP");
   document.getElementById("dlgyes").textContent=t("rsY");document.getElementById("dlgno").textContent=t("rsN");
@@ -1205,164 +1329,221 @@ function renderQuiz(){
   document.getElementById("rewatch").onclick=()=>openStory();
 }
 
-/* ================= FIELDS ================= */
+/* ================= DEAL ================= */
+function deal(){
+  S.used=S.used||[];
+  S.deck=[1,2,3].map(f=>{
+    const types=BYFAM[f].slice().sort(()=>Math.random()-.5);
+    for(const ty of types){ const free=TYPES[ty].vars.map((_,i)=>i).filter(i=>!S.used.includes(ty+i)); if(free.length) return {t:ty,v:free[Math.floor(Math.random()*free.length)]}; }
+    const ty=types[0]; S.used=S.used.filter(k=>!k.startsWith(ty)); return {t:ty,v:Math.floor(Math.random()*TYPES[ty].vars.length)};
+  });
+  S.deck.forEach(c=>S.used.push(c.t+c.v));
+  S.ans=[null,null,null]; S.step=0; S.why=""; S.t0=null; S.dur=0; S.id=null; S.played=false;
+}
 function renderFields(){
-  const card=k=>{const c=CH[k],d=S.done.includes(k);return `
-    <button class="field ${d?"done":""}" data-f="${k}">${icon(c.icon,"ico bgf")}
-      <div class="top"><span class="fi">${icon(c.icon)}</span><span class="tag">${d?t("doneTag"):t("newTag")}</span></div>
-      <div><h3>${tx(c.name)}</h3><p><b style="color:var(--text)">${tx(c.title)}.</b> ${tx(c.sub)}</p></div>
-      <div class="bot"><span class="meta"><span>${icon("i-clock")}${t("min")}</span><span>${icon("i-layers")}${t("steps")}</span></span><span class="go">${icon("i-arrow")}</span></div>
-    </button>`;};
+  if(!S.deck||S.played) { deal(); save(); }
   app.innerHTML=`<section class="page"><div class="wrap mid"><div class="rise">
-    <span class="eyebrow">${t("fE")}</span><h2 class="h2">${t("fT")}</h2><p class="lead">${t("fL")}</p>
-    <div class="fields">${card("e")}${card("s")}</div>
-    <div class="sublabel">${t("next3")}</div>
-    <div class="soonrow">${SOON.map(s=>`<div class="soonc">${icon(s.i)}<div><b>${s.n}</b><span>${t("soon")}</span></div></div>`).join("")}</div>
+    <span class="eyebrow">${t("dkE")}</span><h2 class="h2">${t("dkT")}</h2><p class="lead">${t("dkL")}</p>
+    <div class="deck">${S.deck.map((c,i)=>{const ty=TYPES[c.t],fm=FAM[ty.f];return `
+      <div class="pcard ${fm.c}" style="--d:${i*180}ms"><div class="in">
+        <div class="face back"><span class="bn">0${i+1}</span>${icon("i-cards","ico bi")}<span class="bl">FORVIA HELLA</span></div>
+        <div class="face front"><span class="famtag">${icon(fm.i)}${tx(fm.n)}</span><span class="ci">${icon(ty.i)}</span><h3>${tx(ty.n)}</h3><p>${tx(ty.d)}</p><span class="cm">${icon("i-clock")}${t("oneMin")}</span></div>
+      </div></div>`;}).join("")}</div>
+    <div class="rules">${t("rules").map(r=>`<span class="pill">${icon("i-check")}${r}</span>`).join("")}</div>
+    <div class="cta" style="position:static;background:none"><button class="btn" id="play">${t("play")}${icon("i-arrow")}</button><button class="link" id="reshuffle">${icon("i-shuffle")}${t("reshuffle")}</button></div>
   </div></div></section>`;
-  app.querySelectorAll(".field[data-f]").forEach(b=>b.onclick=()=>go(()=>{
-    S.field=b.dataset.f;S.step=0;S.view="flow";S.why="";S.t0=null;S.id=null;S.dur=0;S.a[S.field]=blankA(S.field);}));
+  const flip=()=>app.querySelectorAll(".pcard").forEach((c,i)=>setTimeout(()=>c.classList.add("flip"),S.eco?0:350+i*180));
+  flip();
+  document.getElementById("play").onclick=()=>go(()=>{S.view="flow";S.step=0;S.t0=Date.now();});
+  document.getElementById("reshuffle").onclick=()=>{app.querySelectorAll(".pcard").forEach(c=>c.classList.remove("flip"));setTimeout(()=>{deal();save();renderFields();},S.eco?0:420);};
 }
 
 /* ================= FLOW ================= */
+const ready=i=>{const c=S.deck[i],a=S.ans[i],k=TYPES[c.t].kind;if(!a)return false;
+  if(k==="ideas")return (a.i||[]).length>0;
+  if(k==="pick")return a.c!=null&&(a.c!==4||(a.x||"").trim().length>1);
+  if(k==="est")return a.n!=null;
+  if(k==="seq")return a.c!=null&&(a.c!==-1||(a.x||"").trim().length>0);
+  if(k==="obj")return (a.s||[]).length>0;return false;};
 function renderFlow(){
-  const c=CH[S.field]; let body="",ready=true,btn=t("cont");
-  if(S.step===0){ btn=t("begin");
-    body=`<span class="eyebrow">${tx(c.name)}</span><h2 class="q">${tx(c.title)}</h2>
-      <div class="brief">${icon(c.icon,"ico bgi")}<div class="who"><span class="avatar">${icon(c.icon)}</span><div><b>${tx(c.who)}</b><span>FORVIA HELLA</span></div></div>
-      <p>${tx(c.brief)}</p><div class="facts">${c.facts.map(f=>`<div class="fact"><b>${f.b}</b><span>${f[L()]}</span></div>`).join("")}</div></div>
-      <div class="rules">${t("rules").map(r=>`<span class="pill">${icon("i-check")}${r}</span>`).join("")}</div>`;
-  } else if(S.step<=3){ const st=c.steps[S.step-1];
-    body=`<span class="eyebrow">${t("stepOf")(S.step,3)}</span><h2 class="q">${tx(st.q)}</h2><p class="ctx">${tx(st.ctx)}</p>`;
-    if(st.kind==="beam") body+=beamHTML();
-    if(st.kind==="code"){ body+=codeHTML(st); ready=S.a.s.line!==null; }
-    if(st.kind==="choice"){ const key="c"+(S.step-1), sel=S.a[S.field][key]; ready=sel!==null;
-      body+=`<div class="opts" role="radiogroup">${st.opts.map((o,i)=>`<button class="opt" role="radio" aria-checked="${sel===i}" data-i="${i}"><span class="oi">${icon(o.i)}</span><span><h4>${tx(o.t)}</h4><p>${tx(o.d)}</p><span class="tg">${tx(o.g)}</span></span><span class="check">${icon("i-check")}</span></button>`).join("")}</div>`; }
-    if(st.kind==="rank"){ body+=rankHTML(st); ready=S.a.s.rank.length===4; }
-  } else { btn=t("gen");
+  if(!S.deck){S.view="fields";return renderFields();}
+  let body="",btn=t("cont"),ok=true;
+  if(S.step<3){
+    const c=S.deck[S.step],ty=TYPES[c.t],v=ty.vars[c.v],fm=FAM[ty.f];
+    S.ans[S.step]=S.ans[S.step]||{};
+    const head=`<div class="chead ${fm.c}"><span class="famtag">${icon(fm.i)}${tx(fm.n)}</span></div>`;
+    const q=v.q?tx(v.q):(ty.kind==="seq"?t("seqQ"):tx(v.s));
+    body=`${head}<span class="tname">${icon(ty.i)}${tx(ty.n)}</span><h2 class="q">${q}</h2><p class="ctx">${tx(ty.ctx)}</p>${cardUI(c,ty,v)}`;
+    ok=ready(S.step); if(S.step===2) btn=t("cont");
+  } else {
+    btn=t("gen");
     body=`<span class="eyebrow">${t("rE")}</span><h2 class="q">${t("rQ")}</h2><p class="ctx">${t("rC")}</p>
-      <div class="reflect"><textarea id="why" maxlength="140" placeholder="${esc(t("rPh"))}">${esc(S.why)}</textarea><div class="foot"><span id="cnt">${S.why.length}/140</span></div></div>
-      <div class="sublabel">${t("yours")}</div><div class="summary">${answerLines(S.field,payload().a,L()).map((r,i)=>`<div class="sumrow"><span>0${i+1}</span><b style="font-weight:700">${esc(r[1])}</b></div>`).join("")}</div>`;
+      <div class="reflect"><textarea id="why" maxlength="120" placeholder="${esc(t("rPh"))}">${esc(S.why)}</textarea><div class="foot"><span id="cnt">${S.why.length}/120</span></div></div>
+      <div class="sublabel">${t("yours")}</div><div class="summary">${S.deck.map((c,i)=>{const ty=TYPES[c.t];return `<div class="sumrow ${FAM[ty.f].c}"><span>${icon(ty.i)}</span><div><small>${tx(ty.n)}</small><b>${esc(answerText(c,S.ans[i],L()))}</b></div></div>`;}).join("")}</div>`;
   }
-  const bars=Array.from({length:5},(_,i)=>`<i class="${i<S.step?"on":i===S.step?"now":""}"></i>`).join("");
-  const lbl=S.step===0?tx(c.name):S.step<=3?t("stepOf")(S.step,3):t("rE");
+  const bars=Array.from({length:4},(_,i)=>`<i class="${i<S.step?"on":i===S.step?"now":""}"></i>`).join("");
   app.innerHTML=`<section class="page"><div class="wrap narrow" style="display:flex;flex-direction:column;flex:1">
-    <div class="flowbar"><button class="back" id="back" aria-label="Back">${icon("i-back")}</button><div class="prog">${bars}</div><span class="stepno">${lbl}</span></div>
-    <div class="rise">${body}</div>
-    <div class="cta"><button class="btn" id="nextbtn" ${ready?"":"disabled"}>${btn}${icon("i-arrow")}</button>${S.step===4?`<button class="link" id="skip">${t("skip")}</button>`:""}</div>
+    <div class="flowbar"><button class="back" id="back" aria-label="Back">${icon("i-back")}</button><div class="prog">${bars}</div><span class="stepno">${S.step<3?t("cardOf")(S.step+1):t("rE")}</span></div>
+    <div class="rise ${S.step<3?FAM[TYPES[S.deck[S.step].t].f].c:""}">${body}</div>
+    <div class="cta"><button class="btn" id="nextbtn" ${ok?"":"disabled"}>${btn}${icon("i-arrow")}</button>${S.step===3?`<button class="link" id="skip">${t("skip")}</button>`:""}</div>
   </div></section>`;
   document.getElementById("back").onclick=()=>go(()=>{if(S.step===0)S.view="fields";else S.step--;});
-  document.getElementById("nextbtn").onclick=()=>go(()=>{if(S.step===0&&!S.t0)S.t0=Date.now();if(S.step<4)S.step++;else finish();});
+  document.getElementById("nextbtn").onclick=()=>go(()=>{if(S.step<3)S.step++;else finish();});
   const sk=document.getElementById("skip"); if(sk) sk.onclick=()=>go(()=>{S.why="";finish();});
   bindFlow();
 }
-function finish(){S.view="done";S.id=S.id||newId();if(!S.done.includes(S.field))S.done.push(S.field);S.dur=S.t0?Math.round((Date.now()-S.t0)/1000):0;}
+function finish(){S.view="done";S.played=true;S.id=S.id||newId();S.dur=S.t0?Math.round((Date.now()-S.t0)/1000):0;S.rounds=(S.rounds||0)+1;}
 const setReady=v=>{const b=document.getElementById("nextbtn");if(b)b.disabled=!v;};
+
+function cardUI(c,ty,v){
+  const a=S.ans[S.step];
+  if(ty.kind==="ideas"){
+    return `<div class="ideabox">
+      <div class="ideain"><input class="inp" id="idea" maxlength="32" autocomplete="off" enterkeyhint="done" placeholder="${esc(t("ideaPh"))}"><button class="addb" id="addidea" aria-label="${esc(t("add"))}">${icon("i-plus")}</button></div>
+      <div class="ideas" id="ideas"></div>
+      <div class="ideafoot"><span id="icount"></span><span class="timer"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5"/><circle class="tr" cx="18" cy="18" r="15.5"/></svg>${t("oneMinHint")}</span></div></div>`;
+  }
+  if(ty.kind==="pick"){
+    const own=ty.own?`<div class="opt own" role="radio" tabindex="0" aria-checked="${a.c===4}" data-i="4"><span class="oi">${icon("i-pen")}</span><span><h4>${t("ownOpt")}</h4><input class="inp ownin" id="ownx" maxlength="60" placeholder="${esc(t("ownPh"))}" value="${esc(a.x||"")}"></span><span class="check">${icon("i-check")}</span></div>`:"";
+    return `<div class="opts" role="radiogroup">${v.o.map((o,i)=>`<button class="opt" role="radio" aria-checked="${a.c===i}" data-i="${i}"><span class="oi">${icon(OPTICONS[i])}</span><span><h4>${tx(o)}</h4></span><span class="check">${icon("i-check")}</span></button>`).join("")}${own}</div>`;
+  }
+  if(ty.kind==="est"){
+    return `<div class="estbox"><div class="estlbl">${t("estL")}</div><div class="estnum" id="estn">${a.n!=null?fmt(a.n):`<span>${t("estDrag")}</span>`}</div>
+      <input type="range" class="range" id="estr" min="0" max="1000" step="1" value="${a.n!=null?Math.round(Math.log(a.n/v.min)/Math.log(v.max/v.min)*1000):500}" aria-label="${esc(t("estL"))}">
+      <div class="estscale"><span>${fmt(v.min)}</span><span>${fmt(v.max)}</span></div></div>
+      <div class="sublabel" style="margin-top:22px">${t("estF")}</div>
+      <div class="chips" id="fchips">${v.fs.map((f,i)=>`<button class="fchip" aria-pressed="${(a.f||[]).includes(i)}" data-i="${i}">${icon("i-check")}${tx(f)}</button>`).join("")}</div>`;
+  }
+  if(ty.kind==="seq"){
+    const toks=lx(v.tok); const tok=x=>v.shapes?shapeSVG(x):`<b>${x}</b>`;
+    return `<div class="seqrow">${toks.map(x=>`<span class="tok">${tok(x)}</span>`).join("")}<span class="tok q">?</span></div>
+      <div class="opts" role="radiogroup">${v.o.map((o,i)=>`<button class="opt seqopt" role="radio" aria-checked="${a.c===i}" data-i="${i}"><span class="oi big">${v.shapes?shapeSVG(o.a):`<b>${lx(o.a)}</b>`}</span><span><h4>${tx(o.r)}</h4></span><span class="check">${icon("i-check")}</span></button>`).join("")}
+      <div class="opt own" role="radio" tabindex="0" aria-checked="${a.c===-1}" data-i="-1"><span class="oi">${icon("i-pen")}</span><span><h4>${t("ownRule")}</h4><input class="inp ownin" id="ownx" maxlength="60" placeholder="${esc(t("ownRulePh"))}" value="${esc(a.x||"")}"></span><span class="check">${icon("i-check")}</span></div></div>`;
+  }
+  if(ty.kind==="obj"){
+    return `<div class="tiles" id="tiles">${v.it.map((o,i)=>`<button class="otile" aria-pressed="${(a.s||[]).includes(i)}" data-i="${i}"><span class="ob">${"ABCDEF"[i]}</span><span>${tx(o)}</span></button>`).join("")}</div>
+      <div class="objhint" id="objhint">${t("objPick")((a.s||[]).length)}</div>
+      <label class="sublabel" for="objx" style="display:block;margin-top:18px">${t("objHow")}</label>
+      <input class="inp" id="objx" maxlength="70" placeholder="${esc(t("objPh"))}" value="${esc(a.x||"")}">`;
+  }
+  return "";
+}
 function bindFlow(){
-  app.querySelectorAll(".opt").forEach(o=>o.onclick=()=>{S.a[S.field]["c"+(S.step-1)]=+o.dataset.i;save();app.querySelectorAll(".opt").forEach(x=>x.setAttribute("aria-checked",x===o));setReady(true);vib(8);});
-  const why=document.getElementById("why"); if(why) why.oninput=()=>{S.why=why.value;save();document.getElementById("cnt").textContent=`${why.value.length}/140`;};
-  if(document.getElementById("scene")){ app.querySelectorAll(".col,.led").forEach(el=>el.onclick=()=>{const i=+el.dataset.c,o=S.a.e.off,k=o.indexOf(i);if(k>=0)o.splice(k,1);else o.push(i);save();paintBeam();vib(6);}); paintBeam(); }
-  app.querySelectorAll(".ln").forEach(l=>l.onclick=()=>{S.a.s.line=+l.dataset.l;save();app.querySelectorAll(".ln").forEach(x=>{x.classList.toggle("sel",x===l);x.setAttribute("aria-pressed",x===l);});setReady(true);});
-  app.querySelectorAll(".ritem").forEach(r=>r.onclick=()=>{const i=+r.dataset.i,a=S.a.s.rank,k=a.indexOf(i);if(k>=0)a.splice(k,1);else a.push(i);save();paintRank();setReady(a.length===4);vib(6);});
-  const rr=document.getElementById("rankreset"); if(rr) rr.onclick=()=>{S.a.s.rank=[];save();paintRank();setReady(false);};
-  if(document.querySelector(".ritem")) paintRank();
+  const why=document.getElementById("why"); if(why) why.oninput=()=>{S.why=why.value;save();document.getElementById("cnt").textContent=`${why.value.length}/120`;};
+  if(S.step>2) return;
+  const c=S.deck[S.step],ty=TYPES[c.t],v=ty.vars[c.v],a=S.ans[S.step],upd=()=>{save();setReady(ready(S.step));};
+  if(ty.kind==="ideas"){
+    a.i=a.i||[]; const inp=document.getElementById("idea"),list=document.getElementById("ideas");
+    const paint=()=>{list.innerHTML=a.i.map((x,i)=>`<span class="idea">${esc(x)}<button data-i="${i}" aria-label="x">${icon("i-x")}</button></span>`).join("");
+      list.querySelectorAll("button").forEach(b=>b.onclick=()=>{a.i.splice(+b.dataset.i,1);paint();upd();});
+      document.getElementById("icount").textContent=t("ideasN")(a.i.length);
+      inp.disabled=a.i.length>=5; inp.placeholder=a.i.length>=5?t("ideaMax"):t("ideaPh");};
+    const add=()=>{const x=inp.value.trim();if(!x||a.i.length>=5)return;a.i.push(x.slice(0,32));inp.value="";paint();upd();vib(6);if(!S.eco&&!matchMedia("(pointer:coarse)").matches)inp.focus();};
+    document.getElementById("addidea").onclick=add;
+    inp.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();add();}});
+    paint();
+  }
+  if(ty.kind==="pick"||ty.kind==="seq"){
+    app.querySelectorAll(".opt").forEach(o=>o.addEventListener("click",e=>{
+      const i=+o.dataset.i; a.c=i; app.querySelectorAll(".opt").forEach(x=>x.setAttribute("aria-checked",x===o));
+      if(o.classList.contains("own")){const inp=document.getElementById("ownx"); if(e.target!==inp) inp.focus();}
+      upd(); vib(8);}));
+    const own=document.getElementById("ownx");
+    if(own){ own.addEventListener("input",()=>{a.x=own.value;const ownBtn=own.closest(".opt");a.c=+ownBtn.dataset.i;app.querySelectorAll(".opt").forEach(x=>x.setAttribute("aria-checked",x===ownBtn));upd();});
+      own.addEventListener("keydown",e=>{if(e.key===" ")e.stopPropagation();}); }
+  }
+  if(ty.kind==="est"){
+    const r=document.getElementById("estr"),out=document.getElementById("estn");
+    const val=x=>{const raw=v.min*Math.pow(v.max/v.min,x/1000),p=Math.pow(10,Math.max(0,Math.floor(Math.log10(raw))-1));return Math.round(raw/p)*p;};
+    r.addEventListener("input",()=>{a.n=val(+r.value);out.textContent=fmt(a.n);upd();});
+    a.f=a.f||[];
+    app.querySelectorAll(".fchip").forEach(b=>b.onclick=()=>{const i=+b.dataset.i,k=a.f.indexOf(i);
+      if(k>=0)a.f.splice(k,1);else{if(a.f.length>=3)a.f.shift();a.f.push(i);}
+      app.querySelectorAll(".fchip").forEach(x=>x.setAttribute("aria-pressed",a.f.includes(+x.dataset.i)));save();vib(6);});
+  }
+  if(ty.kind==="obj"){
+    a.s=a.s||[];
+    app.querySelectorAll(".otile").forEach(b=>b.onclick=()=>{const i=+b.dataset.i,k=a.s.indexOf(i);
+      if(k>=0)a.s.splice(k,1);else{if(a.s.length>=2)a.s.shift();a.s.push(i);}
+      app.querySelectorAll(".otile").forEach(x=>x.setAttribute("aria-pressed",a.s.includes(+x.dataset.i)));
+      document.getElementById("objhint").textContent=t("objPick")(a.s.length);upd();vib(6);});
+    const x=document.getElementById("objx"); x.oninput=()=>{a.x=x.value;save();};
+  }
 }
-const COLW=[.55,.65,.75,.85,.95,1,1,.95,.85,.75,.65,.55];
-function beamHTML(){
-  const OY=600,TOP=74,fx=(X,y)=>180+(X-180)*(OY-y)/(OY-TOP);
-  const cols=COLW.map((w,i)=>`<polygon class="beamcol" data-c="${i}" points="${fx(i*30,TOP)},${TOP} ${fx(i*30+30.6,TOP)},${TOP} ${fx(i*30+30.6,220)},220 ${fx(i*30,220)},220" fill="url(#bg)" opacity="${w}"/>`).join("");
-  const hits=COLW.map((_,i)=>`<rect class="col" data-c="${i}" x="${i*30}" y="0" width="30" height="220" fill="transparent"/>`).join("");
-  return `<div class="scene" id="scene"><svg viewBox="0 0 360 220" role="img" aria-label="Headlamp scene">
-    <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000315"/><stop offset="1" stop-color="#05103d"/></linearGradient>
-    <linearGradient id="bg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#f2faff" stop-opacity=".62"/><stop offset=".45" stop-color="#bfe9ff" stop-opacity=".3"/><stop offset=".72" stop-color="#9fdcff" stop-opacity=".1"/><stop offset="1" stop-color="#9fdcff" stop-opacity="0"/></linearGradient>
-    <radialGradient id="hl"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#e8f6ff" stop-opacity=".9"/><stop offset="1" stop-color="#9fdcff" stop-opacity="0"/></radialGradient>
-    <filter id="blur"><feGaussianBlur stdDeviation="1.4"/></filter></defs>
-    <rect width="360" height="220" fill="url(#sky)"/>
-    <g fill="#fff" opacity=".5"><circle cx="30" cy="20" r=".7"/><circle cx="90" cy="38" r=".5"/><circle cx="210" cy="16" r=".6"/><circle cx="300" cy="30" r=".7"/><circle cx="250" cy="52" r=".4"/><circle cx="150" cy="26" r=".5"/></g>
-    <path d="M0 96 Q60 78 120 90 T240 86 T360 92 V220 H0z" fill="#030a2a"/>
-    <polygon points="150,96 210,96 360,220 0,220" fill="#0b1236"/>
-    <line x1="152" y1="96" x2="18" y2="220" stroke="#fff" stroke-opacity=".35" stroke-width="1.2"/><line x1="208" y1="96" x2="342" y2="220" stroke="#fff" stroke-opacity=".35" stroke-width="1.2"/>
-    <line class="dash" x1="180" y1="96" x2="180" y2="220" stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-dasharray="10 18"/>
-    <g class="obj" id="o-sign"><line x1="318" y1="74" x2="318" y2="112" stroke="#6b7398" stroke-width="1.5"/><circle cx="318" cy="72" r="8.5" fill="#f4f6ff"/><circle cx="318" cy="72" r="8.5" fill="none" stroke="#E5484D" stroke-width="2.2"/><text x="318" y="75" text-anchor="middle" font-size="7.5" font-weight="800" fill="#000B45" font-family="Archivo,sans-serif">90</text></g>
-    <g class="obj" id="o-bike"><circle cx="255" cy="150" r="6" fill="none" stroke="#8d96c2" stroke-width="1.4"/><circle cx="271" cy="150" r="6" fill="none" stroke="#8d96c2" stroke-width="1.4"/><path d="M255 150 L262 141 L271 150 M262 141 L264 132 M259 141 h8" stroke="#8d96c2" stroke-width="1.4" fill="none"/><rect x="260" y="124" width="7" height="10" rx="2" fill="#FED34C"/><rect x="260" y="127.5" width="7" height="1.6" fill="#fff"/><circle cx="264" cy="120" r="3.2" fill="#8d96c2"/></g>
-    <g><circle class="glare" id="glare" cx="156" cy="117" r="20" fill="none" stroke="#F58C35" stroke-width="1.5" opacity=".9"/><path d="M142 121 l3 -8 h22 l3 8 v5 h-28z" fill="#11173d" stroke="#2a3366"/><circle cx="147.5" cy="121" r="5" fill="url(#hl)" filter="url(#blur)"/><circle cx="164.5" cy="121" r="5" fill="url(#hl)" filter="url(#blur)"/><circle cx="147.5" cy="121" r="1.6" fill="#fff"/><circle cx="164.5" cy="121" r="1.6" fill="#fff"/></g>
-    <g style="mix-blend-mode:screen">${cols}</g>${hits}</svg></div>
-  <div class="lamp"><div class="row">${COLW.map((_,i)=>`<button class="led" data-c="${i}" aria-label="LED ${i+1}"></button>`).join("")}</div><div class="legend"><span>L</span><span id="segtxt"></span><span>R</span></div></div>
-  <div class="status"><div class="stat"><span>${t("stCar")}</span><b id="st-car"></b></div><div class="stat"><span>${t("stBike")}</span><b id="st-bike"></b></div><div class="stat"><span>${t("stRoad")}</span><b id="st-road"></b></div></div>`;
+function answerText(c,a,lang){
+  const ty=TYPES[c.t],v=ty.vars[c.v],TT=T[lang]; a=a||{};
+  if(ty.kind==="ideas") return (a.i||[]).join(" · ")||"—";
+  if(ty.kind==="pick") return a.c===4?(a.x||"—"):(a.c!=null?lx(v.o[a.c],lang):"—");
+  if(ty.kind==="est") return a.n!=null?Number(a.n).toLocaleString(lang==="ro"?"ro-RO":"en-US"):"—";
+  if(ty.kind==="seq") return a.c===-1?(a.x||"—"):(a.c!=null?`${seqAns(v,a.c,lang)} · ${lx(v.o[a.c].r,lang)}`:"—");
+  if(ty.kind==="obj") return (a.s||[]).map(i=>lx(v.it[i],lang)).join(" + ")||"—";
+  return "—";
 }
-function paintBeam(){
-  const off=S.a.e.off,on=i=>!off.includes(i);
-  app.querySelectorAll(".beamcol").forEach(r=>r.style.opacity=on(+r.dataset.c)?COLW[+r.dataset.c]:0);
-  app.querySelectorAll(".led").forEach(b=>{b.classList.toggle("on",on(+b.dataset.c));b.setAttribute("aria-pressed",on(+b.dataset.c));});
-  const car=on(4)||on(5),bike=on(9);
-  document.getElementById("glare").style.display=car?"":"none";
-  document.getElementById("o-bike").style.opacity=bike?1:.28;
-  document.getElementById("o-sign").style.opacity=on(10)?1:.3;
-  const pct=Math.round(COLW.reduce((s,w,i)=>s+(on(i)?w:0),0)/COLW.reduce((a,b)=>a+b,0)*100);
-  document.getElementById("st-car").innerHTML=car?`<i class="warn"></i>${t("vDaz")}`:`<i></i>${t("vSafe")}`;
-  document.getElementById("st-bike").innerHTML=bike?`<i></i>${t("vVis")}`:`<i class="warn"></i>${t("vHard")}`;
-  document.getElementById("st-road").innerHTML=`<i class="${pct<60?"warn":""}"></i>${pct}%`;
-  document.getElementById("segtxt").textContent=t("segOff")(off.length);
+
+/* ================= payload ================= */
+function payload(){
+  const d=S.deck.map((c,i)=>{const a=S.ans[i]||{},k=TYPES[c.t].kind;let r;
+    if(k==="ideas")r=(a.i||[]).slice(0,5).map(x=>x.slice(0,32));
+    else if(k==="pick")r=a.c===4?[4,(a.x||"").slice(0,60)]:[a.c];
+    else if(k==="est")r=[a.n,a.f||[]];
+    else if(k==="seq")r=a.c===-1?[-1,(a.x||"").slice(0,60)]:[a.c];
+    else if(k==="obj")r=[a.s||[],(a.x||"").slice(0,70)];
+    return [c.t,c.v,r];});
+  return {v:2,d,w:S.why.trim().slice(0,120),t:Math.min(S.dur||0,3599),l:L(),id:S.id};
 }
-function codeHTML(st){const sel=S.a.s.line;
-  return `<div class="code"><div class="bar"><i></i><i></i><i></i><span>blinker.c</span></div>${CODE.map((l,i)=>`<button class="ln ${sel===i?"sel":""}" data-l="${i}" aria-pressed="${sel===i}"><span class="no">${i+1}</span><span>${l[0]}</span></button>`).join("")}</div>
-  <div class="hintbox">${icon("i-bulb")}<span>${tx(st.hint)}</span></div>`;}
-function rankHTML(st){return `<div class="rank">${st.items.map((it,i)=>`<button class="ritem" data-i="${i}"><span class="num">·</span><span><h4>${tx(it.t)}</h4><p>${tx(it.d)}</p></span>${icon(it.i)}</button>`).join("")}</div>
-  <div class="rankhint"><span id="rankn">${t("tapRank")}</span><button class="link" id="rankreset">${icon("i-restart")}${t("rankReset")}</button></div>`;}
-function paintRank(){const a=S.a.s.rank;app.querySelectorAll(".ritem").forEach(r=>{const k=a.indexOf(+r.dataset.i);r.classList.toggle("ranked",k>=0);r.querySelector(".num").textContent=k>=0?k+1:"·";});
-  const n=document.getElementById("rankn");if(n)n.textContent=a.length?t("ranked")(a.length):t("tapRank");}
-function answerLines(f,a,lang){const c=CH[f],X=o=>o[lang],out=[],TT=T[lang];
-  if(f==="e"){const off=[];for(let i=0;i<12;i++)if(a[0]&(1<<i))off.push(i);
-    out.push([X(c.steps[0].q),`${off.length} ${TT.segs}`,off]);
-    out.push([X(c.steps[1].q),a[1]!=null?X(c.steps[1].opts[a[1]].t):"—"]);
-    out.push([X(c.steps[2].q),a[2]!=null?X(c.steps[2].opts[a[2]].t):"—"]);}
-  else{out.push([X(c.steps[0].q),a[0]!=null?`${TT.line} ${a[0]+1}: ${CODE[a[0]][1].trim()}`:"—"]);
-    out.push([X(c.steps[1].q),a[1]!=null?X(c.steps[1].opts[a[1]].t):"—"]);
-    out.push([X(c.steps[2].q),(a[2]||[]).map(i=>X(c.steps[2].items[i].t)).join(" → ")]);}
-  return out;}
+const unpack=(t,r)=>{const k=TYPES[t].kind;
+  if(k==="ideas")return {i:r||[]};if(k==="pick")return {c:r[0],x:r[1]};if(k==="est")return {n:r[0],f:r[1]||[]};
+  if(k==="seq")return {c:r[0],x:r[1]};if(k==="obj")return {s:r[0]||[],x:r[1]};return {};};
 
 /* ================= DONE ================= */
 function renderDone(){
-  const url=hostURL(payload()), other=S.field==="e"?"s":"e";
+  const url=hostURL(payload());
   app.innerHTML=`<section class="wrap"><div class="done">
-    <div class="dtxt rise"><span class="eyebrow">${t("dE")} · ${tx(CH[S.field].name)}</span><h2 class="h2">${t("dT")}</h2><p class="lead">${t("dL")}</p></div>
+    <div class="dtxt rise"><span class="eyebrow">${t("dE")}</span><h2 class="h2">${t("dT")}</h2><p class="lead">${t("dL")}</p></div>
     <div class="dqr"><div class="qrcard"><div class="qrwrap">${qrSVG(url,!S.eco)}</div>
-      <div class="qmeta"><img src="${LOGO_B}" alt="FORVIA HELLA"><div style="display:flex;align-items:center"><div class="id">${tx(CH[S.field].name)}<br>#${S.id}</div><button class="zoombtn" id="zoombtn" aria-label="${t("zoom")}">${icon("i-expand")}</button></div></div></div></div>
+      <div class="qmeta"><img src="${LOGO_B}" alt="FORVIA HELLA"><div style="display:flex;align-items:center"><div class="id">${t("cardsDone")}<br>#${S.id}</div><button class="zoombtn" id="zoombtn" aria-label="${t("zoom")}">${icon("i-expand")}</button></div></div></div></div>
     <div class="dhow rise"><div class="howto">
       <div class="how"><span class="k">1</span><div><b>${t("d1")}</b><span>${t("d1s")}</span></div></div>
       <div class="how"><span class="k">2</span><div><b>${t("d2")}</b><span>${t("d2s")}</span></div></div>
       <div class="how"><span class="k">3</span><div><b>${t("d3")}</b><span>${t("d3s")}</span></div></div></div>
-      <div class="actions">${S.done.includes(other)?"":`<button class="link" id="other">${icon("i-arrow")}${t("other")}</button>`}<button class="link" id="again">${icon("i-restart")}${t("again")}</button></div></div>
+      <div class="actions"><button class="link" id="other">${icon("i-shuffle")}${t("other")}</button><button class="link" id="again">${icon("i-restart")}${t("again")}</button></div></div>
   </div></section>`;
   vib([10,30,10,30,40]);
   document.getElementById("zoombtn").onclick=()=>{document.getElementById("zoomqr").innerHTML=qrSVG(url,false);document.getElementById("zoomtxt").textContent=t("zoomTxt")+" · #"+S.id;document.getElementById("zoom").classList.add("on");};
-  const o=document.getElementById("other"); if(o) o.onclick=()=>go(()=>{S.field=other;S.step=0;S.view="flow";S.why="";S.t0=null;S.id=null;S.dur=0;S.a[other]=blankA(other);});
+  document.getElementById("other").onclick=()=>go(()=>{deal();S.view="fields";});
   document.getElementById("again").onclick=()=>document.getElementById("reset").click();
 }
 
 /* ================= HOST ================= */
 function renderHost(){
   let p=null; try{p=JSON.parse(b64d(location.hash.slice(3)));}catch(e){}
-  if(!p||!CH[p.f]||!Array.isArray(p.a)){app.innerHTML=`<section class="page"><div class="wrap narrow rise" style="text-align:center;padding-top:40px"><h2 class="h2">${t("badT")}</h2><p class="lead" style="margin:0 auto">${t("badL")}</p></div></section>`;return;}
-  const lang=L(),c=CH[p.f],lines=answerLines(p.f,p.a,lang),asks=[];
-  if(p.f==="e"){asks.push(...ASK.e.beam(lines[0][2],lang));if(p.a[1]!=null)asks.push(ASK.e.s1[p.a[1]][lang]);if(p.a[2]!=null)asks.push(ASK.e.s2[p.a[2]][lang]);}
-  else{if(p.a[0]!=null)asks.push(ASK.s.code(p.a[0],lang));if(p.a[1]!=null)asks.push(ASK.s.s1[p.a[1]][lang]);if(Array.isArray(p.a[2])&&p.a[2].length===4)asks.push(ASK.s.rank(p.a[2],c.steps[2].items,lang));}
-  const vis=i=>{
-    if(p.f==="e"&&i===0){const off=lines[0][2];return `<div class="minileds">${Array.from({length:12},(_,k)=>`<i class="${off.includes(k)?"":"on"}"></i>`).join("")}</div>`;}
-    if(p.f==="s"&&i===0&&p.a[0]!=null){const a=Math.max(0,p.a[0]-2),b=Math.min(CODE.length,p.a[0]+3);return `<div class="minicode">${CODE.slice(a,b).map((l,k)=>`<span class="${a+k===p.a[0]?"hl":""}">${String(a+k+1).padStart(2," ")}  ${esc(l[1])}</span>`).join("\n")}</div>`;}
-    if(p.f==="s"&&i===2&&Array.isArray(p.a[2]))return `<div class="olist">${p.a[2].map(k=>`<div>${esc(c.steps[2].items[k].t[lang])}</div>`).join("")}</div>`;
-    return "";};
+  const valid=p&&p.v===2&&Array.isArray(p.d)&&p.d.length&&p.d.every(x=>TYPES[x[0]]&&TYPES[x[0]].vars[x[1]]);
+  if(!valid){app.innerHTML=`<section class="page"><div class="wrap narrow rise" style="text-align:center;padding-top:40px"><h2 class="h2">${t("badT")}</h2><p class="lead" style="margin:0 auto">${t("badL")}</p></div></section>`;return;}
+  const lang=L();
+  const cards=p.d.map(([ty,vi,r],i)=>{const T0=TYPES[ty],v=T0.vars[vi],fm=FAM[T0.f],a=unpack(ty,r);
+    const q=v.q?lx(v.q,lang):(T0.kind==="seq"?T[lang].seqQ:lx(v.s,lang));
+    let vis="";
+    if(T0.kind==="ideas") vis=`<div class="hideas">${(a.i||[]).map(x=>`<span>${esc(x)}</span>`).join("")||"—"}</div>`;
+    else if(T0.kind==="seq"){const toks=lx(v.tok,lang);vis=`<div class="seqrow sm">${toks.map(x=>`<span class="tok">${v.shapes?shapeSVG(x):`<b>${x}</b>`}</span>`).join("")}<span class="tok q">${a.c>=0&&v.shapes?shapeSVG(v.o[a.c].a):(a.c>=0?`<b>${esc(lx(v.o[a.c].a,lang))}</b>`:"?")}</span></div><div class="ha">${esc(answerText({t:ty,v:vi},a,lang))}</div>`;}
+    else if(T0.kind==="est") vis=`<div class="ha big">${esc(answerText({t:ty,v:vi},a,lang))}</div>${(a.f||[]).length?`<div class="hchips">${a.f.map(f=>`<span>${esc(lx(v.fs[f],lang))}</span>`).join("")}</div>`:""}`;
+    else if(T0.kind==="obj") vis=`<div class="ha">${esc(answerText({t:ty,v:vi},a,lang))}</div>${a.x?`<div class="hnote">„${esc(a.x)}”</div>`:""}`;
+    else vis=`<div class="ha">${esc(answerText({t:ty,v:vi},a,lang))}</div>`;
+    const asks=ASK[ty](a,v,lang);
+    return `<div class="hcard ${fm.c}"><div class="hhead"><span class="famtag">${icon(fm.i)}${lx(fm.n,lang)}</span><span class="hk">0${i+1} · ${lx(T0.n,lang)}</span></div>
+      <div class="hq">${esc(q)}</div>${vis}
+      <div class="hask">${asks.map(x=>`<div class="prompt">${icon("i-chat")}<span>${esc(x)}</span></div>`).join("")}</div>
+      <div class="hobs">${icon("i-eye")}<span>${lx(fm.o,lang)}</span></div></div>`;}).join("");
   app.innerHTML=`<section class="page"><div class="wrap narrow"><div class="rise">
     <div class="hosthead"><span class="okpill"><i></i>${t("hPill")}</span><span class="stepno">#${esc(p.id||"—")}</span></div>
     <h2 class="h2">${t("hT")}</h2><p class="lead">${t("hL")}</p>
-    <div class="hfacts"><div class="hfact"><b>${tx(c.name)}</b><span>${t("hF")}</span></div><div class="hfact"><b>${p.t?t("secs")(p.t):"—"}</b><span>${t("hTm")}</span></div><div class="hfact"><b>${(p.l||"ro").toUpperCase()}</b><span>${t("hLg")}</span></div></div>
+    <div class="hfacts"><div class="hfact"><b>3</b><span>${t("hF")}</span></div><div class="hfact"><b>${p.t?t("secs")(p.t):"—"}</b><span>${t("hTm")}</span></div><div class="hfact"><b>${(p.l||"ro").toUpperCase()}</b><span>${t("hLg")}</span></div></div>
     <div class="hsec"><h3>${t("hWhy")}</h3>${p.w?`<div class="hquote">„${esc(p.w)}”</div>`:`<div class="hquote empty">${t("hNoWhy")}</div>`}</div>
-    <div class="hsec"><h3>${t("hAsk")}</h3><div class="prompts">${asks.map(a=>`<div class="prompt">${icon("i-chat")}<span>${esc(a)}</span></div>`).join("")}</div></div>
-    <div class="hsec"><h3>${t("hCh")}</h3>${lines.map((r,i)=>`<div class="hcard"><div class="hk">0${i+1} · ${tx(c.title)}</div><div class="hq">${esc(r[0])}</div>${p.f==="s"&&i===2?"":`<div class="ha">${esc(r[1])}</div>`}${vis(i)}</div>`).join("")}</div>
-    <div class="hsec"><h3>${t("hLook")}</h3><div class="look">${t("look").map(x=>`<span class="pill">${icon("i-eye")}${x}</span>`).join("")}</div></div>
+    <div class="hsec"><h3>${t("hCh")}</h3>${cards}</div>
     <div class="reward" id="reward"><span class="eyebrow">${t("rwQ")}</span><div class="big" id="rwtxt">${icon("i-gift")}</div><button class="btn" id="rwbtn">${t("rwB")}${icon("i-check")}</button><p class="note">${t("rwN")}</p></div>
   </div></div></section>`;
   document.getElementById("rwbtn").onclick=()=>{document.getElementById("reward").classList.add("given");document.getElementById("rwtxt").textContent=t("rwD");document.getElementById("rwbtn").remove();vib([10,40,10]);};
 }
+
 addEventListener("hashchange",()=>render());
 
 loadFonts();
